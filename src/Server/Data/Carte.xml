@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Legenda ID:
+V.. = via
+PL.. = place
+R.. = railroad
+S.. = società
+U.. = utilità
+PR.. = probabilità
+I.. = imprevisto
+T.. = tassa
+PG.. = prigione
+X.. = parcheggio
+GPG.. = vai in prigione
+-->
+<Cards>
+    <Place>
+        <Casella ID="V#00">
+            <Nome>Via!</Nome>
+        </Casella>
+        <Casella ID="PL#01">
+            <Nome>Mediterranean Avenue</Nome>
+            <PrezzoAcquisto>60</PrezzoAcquisto>
+            <Gruppo>0</Gruppo>
+            <Rendita>
+                <Terreno>2</Terreno>
+                <Uno>10</Uno>
+                <Due>30</Due>
+                <Tre>90</Tre>
+                <Quattro>160</Quattro>
+                <Albergo>250</Albergo>
+            </Rendita>
+            <PrezzoCasa>50</PrezzoCasa>
+            <Ipoteca>30</Ipoteca>
+        </Casella>
+        <Casella ID="PR#02">
+            <Nome>Community Chest</Nome>
+        </Casella>
+        <Casella ID="PL#03">
+            <Nome>Baltic Avenue</Nome>
+            <PrezzoAcquisto>60</PrezzoAcquisto>
+            <Gruppo>0</Gruppo>
+            <Rendita>
+                <Terreno>4</Terreno>
+                <Uno>20</Uno>
+                <Due>60</Due>
+                <Tre>180</Tre>
+                <Quattro>320</Quattro>
+                <Albergo>450</Albergo>
+            </Rendita>
+            <PrezzoCasa>50</PrezzoCasa>
+            <Ipoteca>30</Ipoteca>
+        </Casella>
+        <Casella ID="T#04">
+            <Nome>Income Tax</Nome>
+        </Casella>
+        <Casella ID="R#05">
+            <Nome>Reading Railroad</Nome>
+            <PrezzoAcquisto>200</PrezzoAcquisto>
+            <Rendita>
+                <Uno>25</Uno>
+                <Due>50</Due>
+                <Tre>100</Tre>
+                <Quattro>200</Quattro>
+            </Rendita>
+            <Ipoteca>100</Ipoteca>
+        </Casella>
+        <Casella ID="PL#06">
+            <Nome>Oriental Avenue</Nome>
+            <PrezzoAcquisto>100</PrezzoAcquisto>
+            <Gruppo>1</Gruppo>
+            <Rendita>
+                <Terreno>6</Terreno>
+                <Uno>30</Uno>
+                <Due>90</Due>
+                <Tre>270</Tre>
+                <Quattro>400</Quattro>
+                <Albergo>550</Albergo>
+            </Rendita>
+            <PrezzoCasa>50</PrezzoCasa>
+            <Ipoteca>50</Ipoteca>
+        </Casella>
+        <Casella ID="I#07">
+            <Nome>Chance</Nome>
+        </Casella>
+        <Casella ID="PL#08">
+            <Nome>Vermount Avenue</Nome>
+            <PrezzoAcquisto>100</PrezzoAcquisto>
+            <Gruppo>1</Gruppo>
+            <Rendita>
+                <Terreno>6</Terreno>
+                <Uno>30</Uno>
+                <Due>90</Due>
+                <Tre>270</Tre>
+                <Quattro>400</Quattro>
+                <Albergo>550</Albergo>
+            </Rendita>
+            <PrezzoCasa>50</PrezzoCasa>
+            <Ipoteca>50</Ipoteca>
+        </Casella>
+        <Casella ID="PL#09">
+            <Nome>Connecticut Avenue</Nome>
+            <PrezzoAcquisto>120</PrezzoAcquisto>
+            <Gruppo>1</Gruppo>
+            <Rendita>
+                <Terreno>8</Terreno>
+                <Uno>40</Uno>
+                <Due>100</Due>
+                <Tre>300</Tre>
+                <Quattro>450</Quattro>
+                <Albergo>600</Albergo>
+            </Rendita>
+            <PrezzoCasa>50</PrezzoCasa>
+            <Ipoteca>60</Ipoteca>
+        </Casella>
+        <Casella ID="PG#10">
+            <Nome>Prigione</Nome>
+        </Casella>
+        <Casella ID="PL#11">
+            <Nome>St. Charles Place</Nome>
+            <PrezzoAcquisto>140</PrezzoAcquisto>
+            <Gruppo>2</Gruppo>
+            <Rendita>
+                <Terreno>10</Terreno>
+                <Uno>50</Uno>
+                <Due>150</Due>
+                <Tre>450</Tre>
+                <Quattro>625</Quattro>
+                <Albergo>750</Albergo>
+            </Rendita>
+            <PrezzoCasa>100</PrezzoCasa>
+            <Ipoteca>70</Ipoteca>
+        </Casella>
+        <Casella ID="S#12">
+            <Nome>Electric Company</Nome>
+            <PrezzoAcquisto>150</PrezzoAcquisto>
+            <Rendita>
+                <MoltUno>4</MoltUno>
+                <MoltDue>10</MoltDue>
+            </Rendita>
+            <Ipoteca>75</Ipoteca>
+        </Casella>
+        <Casella ID="PL#13">
+            <Nome>States Avenue</Nome>
+            <PrezzoAcquisto>140</PrezzoAcquisto>
+            <Gruppo>2</Gruppo>
+            <Rendita>
+                <Terreno>10</Terreno>
+                <Uno>50</Uno>
+                <Due>150</Due>
+                <Tre>450</Tre>
+                <Quattro>625</Quattro>
+                <Albergo>750</Albergo>
+            </Rendita>
+            <PrezzoCasa>100</PrezzoCasa>
+            <Ipoteca>70</Ipoteca>
+        </Casella>
+        <Casella ID="PL#14">
+            <Nome>Virginia Avenue</Nome>
+            <PrezzoAcquisto>160</PrezzoAcquisto>
+            <Gruppo>2</Gruppo>
+            <Rendita>
+                <Terreno>12</Terreno>
+                <Uno>60</Uno>
+                <Due>180</Due>
+                <Tre>500</Tre>
+                <Quattro>700</Quattro>
+                <Albergo>900</Albergo>
+            </Rendita>
+            <PrezzoCasa>100</PrezzoCasa>
+            <Ipoteca>80</Ipoteca>
+        </Casella>
+        <Casella ID="R#15">
+            <Nome>Pennsylvania Railroad</Nome>
+            <PrezzoAcquisto>200</PrezzoAcquisto>
+            <Rendita>
+                <Uno>25</Uno>
+                <Due>50</Due>
+                <Tre>100</Tre>
+                <Quattro>200</Quattro>
+            </Rendita>
+            <Ipoteca>100</Ipoteca>
+        </Casella>
+        <Casella ID="PL#16">
+            <Nome>St. James Place</Nome>
+            <PrezzoAcquisto>180</PrezzoAcquisto>
+            <Gruppo>3</Gruppo>
+            <Rendita>
+                <Terreno>14</Terreno>
+                <Uno>70</Uno>
+                <Due>200</Due>
+                <Tre>550</Tre>
+                <Quattro>750</Quattro>
+                <Albergo>950</Albergo>
+            </Rendita>
+            <PrezzoCasa>100</PrezzoCasa>
+            <Ipoteca>90</Ipoteca>
+        </Casella>
+        <Casella ID="PR#17">
+            <Nome>Community Chest</Nome>
+        </Casella>
+        <Casella ID="PL#18">
+            <Nome>Tennessee Avenue</Nome>
+            <PrezzoAcquisto>180</PrezzoAcquisto>
+            <Gruppo>3</Gruppo>
+            <Rendita>
+                <Terreno>14</Terreno>
+                <Uno>70</Uno>
+                <Due>200</Due>
+                <Tre>550</Tre>
+                <Quattro>750</Quattro>
+                <Albergo>950</Albergo>
+            </Rendita>
+            <PrezzoCasa>100</PrezzoCasa>
+            <Ipoteca>90</Ipoteca>
+        </Casella>
+        <Casella ID="PL#19">
+            <Nome>New York Avenue</Nome>
+            <PrezzoAcquisto>200</PrezzoAcquisto>
+            <Gruppo>3</Gruppo>
+            <Rendita>
+                <Terreno>16</Terreno>
+                <Uno>80</Uno>
+                <Due>220</Due>
+                <Tre>600</Tre>
+                <Quattro>800</Quattro>
+                <Albergo>1000</Albergo>
+            </Rendita>
+            <PrezzoCasa>100</PrezzoCasa>
+            <Ipoteca>100</Ipoteca>
+        </Casella>
+        <Casella ID="X#20">
+            <Nome>Parcheggio</Nome>
+        </Casella>
+        <Casella ID="PL#21">
+            <Nome>Kentucky Avenue</Nome>
+            <PrezzoAcquisto>220</PrezzoAcquisto>
+            <Gruppo>4</Gruppo>
+            <Rendita>
+                <Terreno>18</Terreno>
+                <Uno>90</Uno>
+                <Due>250</Due>
+                <Tre>700</Tre>
+                <Quattro>875</Quattro>
+                <Albergo>1050</Albergo>
+            </Rendita>
+            <PrezzoCasa>150</PrezzoCasa>
+            <Ipoteca>110</Ipoteca>
+        </Casella>
+        <Casella ID="I#22">
+            <Nome>Chance</Nome>
+        </Casella>
+        <Casella ID="PL#23">
+            <Nome>Indiana Avenue</Nome>
+            <PrezzoAcquisto>220</PrezzoAcquisto>
+            <Gruppo>4</Gruppo>
+            <Rendita>
+                <Terreno>18</Terreno>
+                <Uno>90</Uno>
+                <Due>250</Due>
+                <Tre>700</Tre>
+                <Quattro>875</Quattro>
+                <Albergo>1050</Albergo>
+            </Rendita>
+            <PrezzoCasa>150</PrezzoCasa>
+            <Ipoteca>110</Ipoteca>
+        </Casella>
+        <Casella ID="PL#24">
+            <Nome>Illinois Avenue</Nome>
+            <PrezzoAcquisto>240</PrezzoAcquisto>
+            <Gruppo>4</Gruppo>
+            <Rendita>
+                <Terreno>20</Terreno>
+                <Uno>100</Uno>
+                <Due>300</Due>
+                <Tre>750</Tre>
+                <Quattro>925</Quattro>
+                <Albergo>1100</Albergo>
+            </Rendita>
+            <PrezzoCasa>150</PrezzoCasa>
+            <Ipoteca>120</Ipoteca>
+        </Casella>
+        <Casella ID="R#25">
+            <Nome>B. O. Railroad</Nome>
+            <PrezzoAcquisto>200</PrezzoAcquisto>
+            <Rendita>
+                <Uno>25</Uno>
+                <Due>50</Due>
+                <Tre>100</Tre>
+                <Quattro>200</Quattro>
+            </Rendita>
+            <Ipoteca>100</Ipoteca>
+        </Casella>
+        <Casella ID="PL#26">
+            <Nome>Atlantic Avenue</Nome>
+            <PrezzoAcquisto>260</PrezzoAcquisto>
+            <Gruppo>5</Gruppo>
+            <Rendita>
+                <Terreno>22</Terreno>
+                <Uno>110</Uno>
+                <Due>330</Due>
+                <Tre>800</Tre>
+                <Quattro>975</Quattro>
+                <Albergo>1150</Albergo>
+            </Rendita>
+            <PrezzoCasa>150</PrezzoCasa>
+            <Ipoteca>130</Ipoteca>
+        </Casella>
+        <Casella ID="PL#27">
+            <Nome>Ventnor Avenue</Nome>
+            <PrezzoAcquisto>260</PrezzoAcquisto>
+            <Gruppo>5</Gruppo>
+            <Rendita>
+                <Terreno>22</Terreno>
+                <Uno>110</Uno>
+                <Due>330</Due>
+                <Tre>800</Tre>
+                <Quattro>975</Quattro>
+                <Albergo>1150</Albergo>
+            </Rendita>
+            <PrezzoCasa>150</PrezzoCasa>
+            <Ipoteca>130</Ipoteca>
+        </Casella>
+        <Casella ID="S#28">
+            <Nome>Water Works</Nome>
+            <PrezzoAcquisto>150</PrezzoAcquisto>
+            <Rendita>
+                <MoltUno>4</MoltUno>
+                <MoltDue>10</MoltDue>
+            </Rendita>
+            <Ipoteca>75</Ipoteca>
+        </Casella>
+        <Casella ID="PL#29">
+            <Nome>Marvin Gardens</Nome>
+            <PrezzoAcquisto>280</PrezzoAcquisto>
+            <Gruppo>5</Gruppo>
+            <Rendita>
+                <Terreno>24</Terreno>
+                <Uno>120</Uno>
+                <Due>360</Due>
+                <Tre>850</Tre>
+                <Quattro>1025</Quattro>
+                <Albergo>1200</Albergo>
+            </Rendita>
+            <PrezzoCasa>150</PrezzoCasa>
+            <Ipoteca>140</Ipoteca>
+        </Casella>
+        <Casella ID="GPG#30">
+            <Nome>Go to Jail</Nome>
+        </Casella>
+        <Casella ID="PL#31">
+            <Nome>Pacific Avenue</Nome>
+            <PrezzoAcquisto>300</PrezzoAcquisto>
+            <Gruppo>6</Gruppo>
+            <Rendita>
+                <Terreno>26</Terreno>
+                <Uno>130</Uno>
+                <Due>390</Due>
+                <Tre>900</Tre>
+                <Quattro>1100</Quattro>
+                <Albergo>1275</Albergo>
+            </Rendita>
+            <PrezzoCasa>200</PrezzoCasa>
+            <Ipoteca>150</Ipoteca>
+        </Casella>
+        <Casella ID="PL#32">
+            <Nome>North Carolina Avenue</Nome>
+            <PrezzoAcquisto>300</PrezzoAcquisto>
+            <Gruppo>6</Gruppo>
+            <Rendita>
+                <Terreno>26</Terreno>
+                <Uno>130</Uno>
+                <Due>390</Due>
+                <Tre>900</Tre>
+                <Quattro>1100</Quattro>
+                <Albergo>1275</Albergo>
+            </Rendita>
+            <PrezzoCasa>200</PrezzoCasa>
+            <Ipoteca>150</Ipoteca>
+        </Casella>
+        <Casella ID="PR#33">
+            <Nome>Community Chest</Nome>
+        </Casella>
+        <Casella ID="PL#34">
+            <Nome>Pennsylvania Avenue</Nome>
+            <PrezzoAcquisto>6</PrezzoAcquisto>
+            <Gruppo>6</Gruppo>
+            <Rendita>
+                <Terreno>28</Terreno>
+                <Uno>150</Uno>
+                <Due>450</Due>
+                <Tre>1000</Tre>
+                <Quattro>1200</Quattro>
+                <Albergo>1400</Albergo>
+            </Rendita>
+            <PrezzoCasa>200</PrezzoCasa>
+            <Ipoteca>160</Ipoteca>
+        </Casella>
+        <Casella ID="R#35">
+            <Nome>Short Line</Nome>
+            <PrezzoAcquisto>200</PrezzoAcquisto>
+            <Rendita>
+                <Uno>25</Uno>
+                <Due>50</Due>
+                <Tre>100</Tre>
+                <Quattro>200</Quattro>
+            </Rendita>
+            <Ipoteca>100</Ipoteca>
+        </Casella>
+        <Casella ID="PL#36">
+            <Nome>Park Place</Nome>
+            <PrezzoAcquisto>350</PrezzoAcquisto>
+            <Gruppo>7</Gruppo>
+            <Rendita>
+                <Terreno>35</Terreno>
+                <Uno>175</Uno>
+                <Due>500</Due>
+                <Tre>1100</Tre>
+                <Quattro>1300</Quattro>
+                <Albergo>1500</Albergo>
+            </Rendita>
+            <PrezzoCasa>200</PrezzoCasa>
+            <Ipoteca>175</Ipoteca>
+        </Casella>
+        <Casella ID="I#37">
+            <Nome>Chance</Nome>
+        </Casella>
+        <Casella ID="PL#38">
+            <Nome>Boardwalk</Nome>
+            <PrezzoAcquisto>400</PrezzoAcquisto>
+            <Gruppo>7</Gruppo>
+            <Rendita>
+                <Terreno>50</Terreno>
+                <Uno>200</Uno>
+                <Due>600</Due>
+                <Tre>1400</Tre>
+                <Quattro>1700</Quattro>
+                <Albergo>2000</Albergo>
+            </Rendita>
+            <PrezzoCasa>200</PrezzoCasa>
+            <Ipoteca>200</Ipoteca>
+        </Casella>
+    </Place>
+    <Imprevisti>
+        <Carta>
+            <Nome>Avanza alla stazione successiva, se libera è possibile comprarla, se occupata si
+                deve pagare il doppio</Nome>
+            <Valore>?</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Eseguite lavori di manutenzione su tutti i vostri edifici: pagare 25€ per ogni
+                casa e 10€ per ogni albero posseduti</Nome>
+            <Valore>?</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Andate avanti fino al "VIA!" e ritirate 200€</Nome>
+            <Valore>+200</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Andate in prigione direttamente senza passare dal "VIA!"</Nome>
+            <Valore>?</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Andate fino a Broadwalk, se passate dal "VIA!" ritirate 200€</Nome>
+            <Valore>?</Valore>
+        </Carta>
+        <Carta>
+            <Nome>La banca vi paga un dividendo di 50€</Nome>
+            <Valore>+50</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Maturano le cedole dei vostri fondi immobiliari, incassate 150€</Nome>
+            <Valore>+150</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Multa per eccesso di velocità, pagate 15€</Nome>
+            <Valore>-15</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Siete stati promossi alla presidenza del consiglio di amministrazione, pagate 50€
+                ad ogni giocatore</Nome>
+            <Valore>?</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Andate fino a States Avenue, se passate dal "VIA!" ritirate 200€</Nome>
+            <Valore>?</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Fate 3 passi indietro</Nome>
+            <Valore>?</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Andate fino a B. O. Railroad, se passate dal "VIA!" ritirate 200€</Nome>
+            <Valore>?</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Avanza alla società successiva, se libera è possibile comprarla, se occupata si
+                deve pagare 10 volte tanto il valore del lancio</Nome>
+            <Valore>?</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Andate fino a Illinois Avenue, se passate dal "VIA!" ritirate 200€</Nome>
+            <Valore>?</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Avanza alla stazione successiva, se libera è possibile comprarla, se occupata si
+                deve pagare il doppio</Nome>
+            <Valore>?</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Uscite di prigione gratis</Nome>
+            <Valore>?</Valore>
+        </Carta>
+    </Imprevisti>
+    <Probabilita>
+        <Carta>
+            <Nome>Ricevete la parcella del dottore, pagate 50€</Nome>
+            <Valore>-50</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Andate avanti fino al "VIA!" e ritirate 200€</Nome>
+            <Valore>+200</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Dalla vendita di uno stock di merci ricavate 50€</Nome>
+            <Valore>+50</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Uscite gratis di prigione</Nome>
+            <Valore>?</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Ereditate 100€ da un lontanto zio</Nome>
+            <Valore>+100</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Pagate 50€ per le rette scolastiche dei vostri figli</Nome>
+            <Valore>-50</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Ricevete 25€ per la vostra consulenza</Nome>
+            <Valore>+25</Valore>
+        </Carta>
+        <Carta>
+            <Nome>E' il vostro compleanno, ogni giocatore vi regala 10€</Nome>
+            <Valore>?</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Maturano le cedole delle vostre azioni, ricevete 100€</Nome>
+            <Valore>+100</Valore>
+        </Carta>
+        <Carta>
+            <Nome>La banca riconosce un eroore nel vostro estratto conto, incassate 200€</Nome>
+            <Valore>+200</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Pagate per contributi per miglioria stradale, 40€ per ogni casa e 115€ per ogni
+                albergo</Nome>
+            <Valore>?</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Maturano gli interessi della vostra assicurazione sulla vita, incassate 100€</Nome>
+            <Valore>+100</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Andate in prigione direttamente senza passare dal "VIA!"</Nome>
+            <Valore>?</Valore>
+        </Carta>
+        <Carta>
+            <Nome>VI viene rimborsata la tassa dei redditi, incassate 20€</Nome>
+            <Valore>+20</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Avete vinto il secondo premio in un concorso di bellezza, incassate 10€</Nome>
+            <Valore>+10</Valore>
+        </Carta>
+        <Carta>
+            <Nome>Pagate la retta ospedaliera di 100€</Nome>
+            <Valore>-100</Valore>
+        </Carta>
+    </Probabilita>
+</Cards>
