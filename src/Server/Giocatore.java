@@ -2,6 +2,9 @@ package src.Server;
 
 import java.util.ArrayList;
 
+import src.Server.Carte.Carta;
+import src.Server.Carte.Casella;
+
 public class Giocatore {
     String nome;
     int soldi;

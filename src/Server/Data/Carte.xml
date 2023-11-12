@@ -5,18 +5,21 @@ V.. = via
 PL.. = place
 R.. = railroad
 S.. = società
-U.. = utilità
 PR.. = probabilità
 I.. = imprevisto
 T.. = tassa
 PG.. = prigione
 X.. = parcheggio
 GPG.. = vai in prigione
+
+
+TODO: Sistemare le carte di probabilità e imprevisto
 -->
 <Cards>
     <Place>
         <Casella ID="V#00">
             <Nome>Via!</Nome>
+            <PrezzoAcquisto>0</PrezzoAcquisto>
         </Casella>
         <Casella ID="PL#01">
             <Nome>Mediterranean Avenue</Nome>
@@ -35,6 +38,7 @@ GPG.. = vai in prigione
         </Casella>
         <Casella ID="PR#02">
             <Nome>Community Chest</Nome>
+            <PrezzoAcquisto>0</PrezzoAcquisto>
         </Casella>
         <Casella ID="PL#03">
             <Nome>Baltic Avenue</Nome>
@@ -53,6 +57,7 @@ GPG.. = vai in prigione
         </Casella>
         <Casella ID="T#04">
             <Nome>Income Tax</Nome>
+            <PrezzoAcquisto>-200</PrezzoAcquisto>
         </Casella>
         <Casella ID="R#05">
             <Nome>Reading Railroad</Nome>
@@ -82,6 +87,7 @@ GPG.. = vai in prigione
         </Casella>
         <Casella ID="I#07">
             <Nome>Chance</Nome>
+            <PrezzoAcquisto>0</PrezzoAcquisto>
         </Casella>
         <Casella ID="PL#08">
             <Nome>Vermount Avenue</Nome>
@@ -115,6 +121,7 @@ GPG.. = vai in prigione
         </Casella>
         <Casella ID="PG#10">
             <Nome>Prigione</Nome>
+            <PrezzoAcquisto>0</PrezzoAcquisto>
         </Casella>
         <Casella ID="PL#11">
             <Nome>St. Charles Place</Nome>
@@ -198,6 +205,7 @@ GPG.. = vai in prigione
         </Casella>
         <Casella ID="PR#17">
             <Nome>Community Chest</Nome>
+            <PrezzoAcquisto>0</PrezzoAcquisto>
         </Casella>
         <Casella ID="PL#18">
             <Nome>Tennessee Avenue</Nome>
@@ -231,6 +239,7 @@ GPG.. = vai in prigione
         </Casella>
         <Casella ID="X#20">
             <Nome>Parcheggio</Nome>
+            <PrezzoAcquisto>0</PrezzoAcquisto>
         </Casella>
         <Casella ID="PL#21">
             <Nome>Kentucky Avenue</Nome>
@@ -249,6 +258,7 @@ GPG.. = vai in prigione
         </Casella>
         <Casella ID="I#22">
             <Nome>Chance</Nome>
+            <PrezzoAcquisto>0</PrezzoAcquisto>
         </Casella>
         <Casella ID="PL#23">
             <Nome>Indiana Avenue</Nome>
@@ -347,6 +357,7 @@ GPG.. = vai in prigione
         </Casella>
         <Casella ID="GPG#30">
             <Nome>Go to Jail</Nome>
+            <PrezzoAcquisto>0</PrezzoAcquisto>
         </Casella>
         <Casella ID="PL#31">
             <Nome>Pacific Avenue</Nome>
@@ -380,6 +391,7 @@ GPG.. = vai in prigione
         </Casella>
         <Casella ID="PR#33">
             <Nome>Community Chest</Nome>
+            <PrezzoAcquisto>0</PrezzoAcquisto>
         </Casella>
         <Casella ID="PL#34">
             <Nome>Pennsylvania Avenue</Nome>
@@ -407,7 +419,11 @@ GPG.. = vai in prigione
             </Rendita>
             <Ipoteca>100</Ipoteca>
         </Casella>
-        <Casella ID="PL#36">
+        <Casella ID="I#36">
+            <Nome>Chance</Nome>
+            <PrezzoAcquisto>0</PrezzoAcquisto>
+        </Casella>
+        <Casella ID="PL#37">
             <Nome>Park Place</Nome>
             <PrezzoAcquisto>350</PrezzoAcquisto>
             <Gruppo>7</Gruppo>
@@ -422,8 +438,9 @@ GPG.. = vai in prigione
             <PrezzoCasa>200</PrezzoCasa>
             <Ipoteca>175</Ipoteca>
         </Casella>
-        <Casella ID="I#37">
-            <Nome>Chance</Nome>
+        <Casella ID="T#38">
+            <Nome>Luxury Tax</Nome>
+            <PrezzoAcquisto>-100</PrezzoAcquisto>
         </Casella>
         <Casella ID="PL#38">
             <Nome>Boardwalk</Nome>
