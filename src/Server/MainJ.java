@@ -1,7 +1,5 @@
 package src.Server;
 
-import java.util.ArrayList;
-
 public class MainJ {
     public static void main(String[] args) throws Exception {
         // try {
@@ -10,6 +8,5 @@ public class MainJ {
         // } catch (Exception e) {
         // System.out.println("Errore: " + e.getMessage());
         // }
-        Parser.parseCarteXml(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
 }

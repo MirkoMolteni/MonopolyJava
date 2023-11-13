@@ -1,22 +1,27 @@
 package src.Server;
 
 import java.util.ArrayList;
-
-import src.Server.Carte.Carta;
-import src.Server.Carte.Casella;
+import src.Server.Carte.*;
 
 public class Giocatore {
     String nome;
     int soldi;
-    // lista delle caselle che possiede
-    ArrayList<Casella> proprietà;
-    // lsita contente le carte bonus possedute
-    ArrayList<Carta> uscitaPrigione;
+    int posizione;
+
+    // lista degli id delle proprieta possedute
+    ArrayList<Carta> proprieta;
+    // lista degli id delle carte uscite di prigione possedute
+    ArrayList<Carta> uscitePrigione;
 
     public Giocatore(String nome) {
         this.nome = nome;
-        soldi = 1500;
-        proprietà = new ArrayList<Casella>();
-        uscitaPrigione = new ArrayList<Carta>();
+        this.soldi = Settings.STARTING_MONEY;
+        this.posizione = 0;
+        this.proprieta = new ArrayList<>();
+        this.uscitePrigione = new ArrayList<>();
+    }
+
+    public int lanciaDadi() {
+        return (int) (Math.random() * Settings.MAX_ROLL);
     }
 }

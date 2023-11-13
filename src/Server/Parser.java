@@ -22,7 +22,7 @@ public class Parser {
         Element root = document.getDocumentElement();
         NodeList place = root.getElementsByTagName("Place");
         NodeList imprevisti = root.getElementsByTagName("Imprevisti");
-        NodeList probabilità = root.getElementsByTagName("Probabilita");
+        NodeList probabilita = root.getElementsByTagName("Probabilita");
 
         for (int j = 0; j < place.getLength(); j++) {
             Element e = (Element) place.item(j);
@@ -64,6 +64,32 @@ public class Parser {
             }
         }
 
-        // TODO: parsare imprevisti e probabilita
+        for (int j = 0; j < imprevisti.getLength(); j++) {
+            Element e = (Element) imprevisti.item(j);
+            NodeList impr = e.getElementsByTagName("Carta");
+            for (int i = 0; i < impr.getLength(); i++) {
+                e = (Element) impr.item(i);
+                String ID = e.getAttribute("ID");
+                String nome = e.getElementsByTagName("Nome").item(0).getTextContent();
+                int prezzo = Integer.parseInt(e.getElementsByTagName("Valore").item(0).getTextContent());
+                int caso = Integer.parseInt(e.getElementsByTagName("Case").item(0).getTextContent());
+                String value = e.getElementsByTagName("Value").item(0).getTextContent();
+                imprev.add(new Imprevisto(ID, nome, prezzo, caso, value));
+            }
+        }
+
+        for (int j = 0; j < probabilita.getLength(); j++) {
+            Element e = (Element) probabilita.item(j);
+            NodeList probab = e.getElementsByTagName("Carta");
+            for (int i = 0; i < probab.getLength(); i++) {
+                e = (Element) probab.item(i);
+                String ID = e.getAttribute("ID");
+                String nome = e.getElementsByTagName("Nome").item(0).getTextContent();
+                int prezzo = Integer.parseInt(e.getElementsByTagName("Valore").item(0).getTextContent());
+                int caso = Integer.parseInt(e.getElementsByTagName("Case").item(0).getTextContent());
+                String value = e.getElementsByTagName("Value").item(0).getTextContent();
+                prob.add(new Probabilita(ID, nome, prezzo, caso, value));
+            }
+        }
     }
 }

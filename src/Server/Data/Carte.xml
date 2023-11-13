@@ -11,9 +11,6 @@ T.. = tassa
 PG.. = prigione
 X.. = parcheggio
 GPG.. = vai in prigione
-
-
-TODO: Sistemare le carte di probabilità e imprevisto
 -->
 <Cards>
     <Place>
@@ -458,142 +455,280 @@ TODO: Sistemare le carte di probabilità e imprevisto
             <Ipoteca>200</Ipoteca>
         </Casella>
     </Place>
+    <!-- 
+        Legenda Action:
+        0 = niente
+        1 = jump alla casella nel value
+            caso vai alla x successiva: x#00 e il moltiplicatore lo sa il server
+        2 = paga case e alberghi, value = case:alberghi
+        3 = paga ogni giocatore, value = soldi: (se soldi positivi li prendo, se negativi pago)
+        4 = avanza di tot passi, value = numPassi: (se numPassi è negativo, vado indietro)
+        5 = uscita dalla prigione
+    -->
     <Imprevisti>
-        <Carta>
+        <Carta ID="IM#00">
             <Nome>Avanza alla stazione successiva, se libera è possibile comprarla, se occupata si
                 deve pagare il doppio</Nome>
-            <Valore>?</Valore>
+            <Valore>0</Valore>
+            <Action>
+                <Case>1</Case>
+                <Value>R#00</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="IM#01">
             <Nome>Eseguite lavori di manutenzione su tutti i vostri edifici: pagare 25€ per ogni
                 casa e 10€ per ogni albero posseduti</Nome>
-            <Valore>?</Valore>
+            <Valore>0</Valore>
+            <Action>
+                <Case>2</Case>
+                <Value>25:10</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="IM#02">
             <Nome>Andate avanti fino al "VIA!" e ritirate 200€</Nome>
             <Valore>+200</Valore>
+            <Action>
+                <Case>1</Case>
+                <Value>V#00</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="IM#03">
             <Nome>Andate in prigione direttamente senza passare dal "VIA!"</Nome>
-            <Valore>?</Valore>
+            <Valore>0</Valore>
+            <Action>
+                <Case>1</Case>
+                <Value>PG#10</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="IM#04">
             <Nome>Andate fino a Broadwalk, se passate dal "VIA!" ritirate 200€</Nome>
-            <Valore>?</Valore>
+            <Valore>0</Valore>
+            <Action>
+                <Case>1</Case>
+                <Value>PL#38</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="IM#05">
             <Nome>La banca vi paga un dividendo di 50€</Nome>
             <Valore>+50</Valore>
+            <Action>
+                <Case>0</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="IM#06">
             <Nome>Maturano le cedole dei vostri fondi immobiliari, incassate 150€</Nome>
             <Valore>+150</Valore>
+            <Action>
+                <Case>0</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="IM#07">
             <Nome>Multa per eccesso di velocità, pagate 15€</Nome>
             <Valore>-15</Valore>
+            <Action>
+                <Case>0</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="IM#08">
             <Nome>Siete stati promossi alla presidenza del consiglio di amministrazione, pagate 50€
                 ad ogni giocatore</Nome>
-            <Valore>?</Valore>
+            <Valore>0</Valore>
+            <Action>
+                <Case>3</Case>
+                <Value>-50:</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="IM#09">
             <Nome>Andate fino a States Avenue, se passate dal "VIA!" ritirate 200€</Nome>
-            <Valore>?</Valore>
+            <Valore>0</Valore>
+            <Action>
+                <Case>1</Case>
+                <Value>PL#13</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="IM#10">
             <Nome>Fate 3 passi indietro</Nome>
-            <Valore>?</Valore>
+            <Valore>0</Valore>
+            <Action>
+                <Case>4</Case>
+                <Value>-3</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="IM#11">
             <Nome>Andate fino a B. O. Railroad, se passate dal "VIA!" ritirate 200€</Nome>
-            <Valore>?</Valore>
+            <Valore>0</Valore>
+            <Action>
+                <Case>1</Case>
+                <Value>R#25</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="IM#12">
             <Nome>Avanza alla società successiva, se libera è possibile comprarla, se occupata si
                 deve pagare 10 volte tanto il valore del lancio</Nome>
-            <Valore>?</Valore>
+            <Valore>0</Valore>
+            <Action>
+                <Case>1</Case>
+                <Value>S#00</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="IM#13">
             <Nome>Andate fino a Illinois Avenue, se passate dal "VIA!" ritirate 200€</Nome>
-            <Valore>?</Valore>
+            <Valore>0</Valore>
+            <Action>
+                <Case>1</Case>
+                <Value>PL#24</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="IM#14">
             <Nome>Avanza alla stazione successiva, se libera è possibile comprarla, se occupata si
                 deve pagare il doppio</Nome>
-            <Valore>?</Valore>
+            <Valore>0</Valore>
+            <Action>
+                <Case>1</Case>
+                <Value>R#00</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="IM#15">
             <Nome>Uscite di prigione gratis</Nome>
-            <Valore>?</Valore>
+            <Valore>0</Valore>
+            <Action>
+                <Case>5</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
     </Imprevisti>
     <Probabilita>
-        <Carta>
+        <Carta ID="PR#00">
             <Nome>Ricevete la parcella del dottore, pagate 50€</Nome>
             <Valore>-50</Valore>
+            <Action>
+                <Case>0</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="PR#01">
             <Nome>Andate avanti fino al "VIA!" e ritirate 200€</Nome>
             <Valore>+200</Valore>
+            <Action>
+                <Case>0</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="PR#02">
             <Nome>Dalla vendita di uno stock di merci ricavate 50€</Nome>
             <Valore>+50</Valore>
+            <Action>
+                <Case>0</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="PR#03">
             <Nome>Uscite gratis di prigione</Nome>
-            <Valore>?</Valore>
+            <Valore>0</Valore>
+            <Action>
+                <Case>5</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="PR#04">
             <Nome>Ereditate 100€ da un lontanto zio</Nome>
             <Valore>+100</Valore>
+            <Action>
+                <Case>0</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="PR#05">
             <Nome>Pagate 50€ per le rette scolastiche dei vostri figli</Nome>
             <Valore>-50</Valore>
+            <Action>
+                <Case>0</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="PR#06">
             <Nome>Ricevete 25€ per la vostra consulenza</Nome>
             <Valore>+25</Valore>
+            <Action>
+                <Case>0</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="PR#07">
             <Nome>E' il vostro compleanno, ogni giocatore vi regala 10€</Nome>
-            <Valore>?</Valore>
+            <Valore>0</Valore>
+            <Action>
+                <Case>3</Case>
+                <Value>+10;</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="PR#08">
             <Nome>Maturano le cedole delle vostre azioni, ricevete 100€</Nome>
             <Valore>+100</Valore>
+            <Action>
+                <Case>0</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="PR#09">
             <Nome>La banca riconosce un eroore nel vostro estratto conto, incassate 200€</Nome>
             <Valore>+200</Valore>
+            <Action>
+                <Case>0</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="PR#10">
             <Nome>Pagate per contributi per miglioria stradale, 40€ per ogni casa e 115€ per ogni
                 albergo</Nome>
-            <Valore>?</Valore>
+            <Valore>0</Valore>
+            <Action>
+                <Case>2</Case>
+                <Value>40:115</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="PR#11">
             <Nome>Maturano gli interessi della vostra assicurazione sulla vita, incassate 100€</Nome>
             <Valore>+100</Valore>
+            <Action>
+                <Case>0</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="PR#12">
             <Nome>Andate in prigione direttamente senza passare dal "VIA!"</Nome>
-            <Valore>?</Valore>
+            <Valore>0</Valore>
+            <Action>
+                <Case>1</Case>
+                <Value>PG#10</Value>
+            </Action>
         </Carta>
-        <Carta>
-            <Nome>VI viene rimborsata la tassa dei redditi, incassate 20€</Nome>
+        <Carta ID="PR#13">
+            <Nome>Vi viene rimborsata la tassa dei redditi, incassate 20€</Nome>
             <Valore>+20</Valore>
+            <Action>
+                <Case>0</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="PR#14">
             <Nome>Avete vinto il secondo premio in un concorso di bellezza, incassate 10€</Nome>
             <Valore>+10</Valore>
+            <Action>
+                <Case>0</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
-        <Carta>
+        <Carta ID="PR#15">
             <Nome>Pagate la retta ospedaliera di 100€</Nome>
             <Valore>-100</Valore>
+            <Action>
+                <Case>0</Case>
+                <Value>0</Value>
+            </Action>
         </Carta>
     </Probabilita>
 </Cards>

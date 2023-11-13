@@ -11,7 +11,8 @@ public class Server {
         System.out.println("Server avviato. In attesa di connessioni...");
     }
 
-    public void start() throws IOException {
+    public void start() throws Exception {
+        Partita p = new Partita();
         while (true) {
             Socket clientSocket = serverSocket.accept();
             System.out.println("Connessione stabilita con " + clientSocket.getInetAddress());
