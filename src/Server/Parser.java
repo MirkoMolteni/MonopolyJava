@@ -12,7 +12,7 @@ import org.w3c.dom.NodeList;
 import src.Server.Carte.*;
 
 public class Parser {
-    public static void parseCarteXml(ArrayList<Carta> mappa, ArrayList<Imprevisto> imprev,
+    public static void parseCarteXml(Carta[] mappa, ArrayList<Imprevisto> imprev,
             ArrayList<Probabilita> prob)
             throws Exception {
 
@@ -32,6 +32,7 @@ public class Parser {
                 String ID = e.getAttribute("ID");
                 String nome = e.getElementsByTagName("Nome").item(0).getTextContent();
                 int prezzo = Integer.parseInt(e.getElementsByTagName("PrezzoAcquisto").item(0).getTextContent());
+                int pos = Integer.parseInt(ID.split("#")[1]);
                 if (ID.split("#")[0].equals("PL")) {
                     int gruppo = Integer.parseInt(e.getElementsByTagName("Gruppo").item(0).getTextContent());
                     int rendita[] = new int[6];
@@ -43,7 +44,7 @@ public class Parser {
                     rendita[5] = Integer.parseInt(e.getElementsByTagName("Albergo").item(0).getTextContent());
                     int prezzoCasa = Integer.parseInt(e.getElementsByTagName("PrezzoCasa").item(0).getTextContent());
                     int ipoteca = Integer.parseInt(e.getElementsByTagName("Ipoteca").item(0).getTextContent());
-                    mappa.add(new Casella(ID, nome, prezzo, gruppo, rendita, prezzoCasa, ipoteca));
+                    mappa[pos] = new Casella(ID, nome, prezzo, gruppo, rendita, prezzoCasa, ipoteca);
                 } else if (ID.split("#")[0].equals("R")) {
                     int rendita[] = new int[4];
                     rendita[0] = Integer.parseInt(e.getElementsByTagName("Uno").item(0).getTextContent());
@@ -51,15 +52,15 @@ public class Parser {
                     rendita[2] = Integer.parseInt(e.getElementsByTagName("Tre").item(0).getTextContent());
                     rendita[3] = Integer.parseInt(e.getElementsByTagName("Quattro").item(0).getTextContent());
                     int ipoteca = Integer.parseInt(e.getElementsByTagName("Ipoteca").item(0).getTextContent());
-                    mappa.add(new Railroad(ID, nome, prezzo, rendita, ipoteca));
+                    mappa[pos] = new Railroad(ID, nome, prezzo, rendita, ipoteca);
                 } else if (ID.split("#")[0].equals("S")) {
                     int moltiplicatori[] = new int[2];
                     moltiplicatori[0] = Integer.parseInt(e.getElementsByTagName("MoltUno").item(0).getTextContent());
                     moltiplicatori[1] = Integer.parseInt(e.getElementsByTagName("MoltDue").item(0).getTextContent());
                     int ipoteca = Integer.parseInt(e.getElementsByTagName("Ipoteca").item(0).getTextContent());
-                    mappa.add(new Societa(ID, nome, prezzo, moltiplicatori, ipoteca));
+                    mappa[pos] = new Societa(ID, nome, prezzo, moltiplicatori, ipoteca);
                 } else {
-                    mappa.add(new Carta(ID, nome, prezzo));
+                    mappa[pos] = new Carta(ID, nome, prezzo);
                 }
             }
         }

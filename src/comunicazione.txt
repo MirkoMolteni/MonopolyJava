@@ -1,0 +1,26 @@
+Standard per la comunicazione: csv
+Utilizziamo dei numeri per decidere cosa fare
+1 - Aggiungi player
+    Il client invia: 1;NOMEPLAYER
+    Il server risponde: 0;TESTOERRORE = errore
+                        1;
+2 - Avvia partita
+    Il client invia: 2;
+    Il server risponde: 0;TESTOERRORE = errore
+                        2;[{INFOPLAYER1},{INFOPLAYER2}]
+3 - Lancia i dadi
+    Il client invia: 3;
+    Il server risponde: 0;TESTOERRORE = errore
+                        3;DADO1;DADO2;{INFOPLAYERAGGIORNATE}
+4 - Acquisto casella
+    Il client invia: 4;IDPLAYER
+    Il server risponde: 0;TESTOERRORE = errore
+                        4;{INFOPLAYERAGGIORNATE}
+5 - Termina turno
+    Il client invia: 5;
+    Il server risponde: 0;TESTOERRORE = errore
+                        5;
+6 - Ipoteca casella
+    Il client invia: 6;IDCASELLA
+    Il server risponde: 0;TESTOERRORE = errore
+                        6;{INFOPLAYERAGGIORNATE}
