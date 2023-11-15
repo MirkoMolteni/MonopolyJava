@@ -44,4 +44,15 @@ public class Carta {
         this.prezzo = prezzo;
         this.propietario = "";
     }
+
+    public boolean isIpotecata() {
+        return false;
+    }
+
+    public void setIpotecata(boolean ipotecata) {
+    }
+
+    public int getValIpoteca() {
+        return 0;
+    }
 }

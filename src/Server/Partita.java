@@ -64,6 +64,8 @@ public class Partita {
                         currentPlayer().addTurnoPrigione();
                         return "3-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer().toString()
                                 + ";Non sei riuscito a uscire di prigione";
+                    } else {
+                        currentPlayer().resetTurniPrigione();
                     }
                 }
             }
@@ -111,10 +113,10 @@ public class Partita {
                 case "T":
                     // tolgo i soldi al player
                     currentPlayer().setSoldi(currentPlayer().getSoldi()
-                            + t.getCasella(currentPlayer().getPosizione()).getPrezzo());
+                            + t.getCasellaByPos(currentPlayer().getPosizione()).getPrezzo());
                     s = "3-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer().toString() + ";Hai pagato "
-                            + Math.abs(t.getCasella(currentPlayer().getPosizione()).getPrezzo()) + "€ di "
-                            + t.getCasella(currentPlayer().getPosizione()).getNome();
+                            + Math.abs(t.getCasellaByPos(currentPlayer().getPosizione()).getPrezzo()) + "€ di "
+                            + t.getCasellaByPos(currentPlayer().getPosizione()).getNome();
                     break;
                 case "GPG":
                     // sposto il player in prigione
@@ -123,6 +125,7 @@ public class Partita {
                             + ";Sei finito in prigione";
                     break;
                 default:
+                    s = "3-0;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer().toString();
                     break;
             }
         } else {
@@ -137,16 +140,18 @@ public class Partita {
         int pos = g.getPosizione();
         String s = "";
 
+        // TODO:controllare se la casella è ipotecata
+
         // controllare se la casella è acquistabile
-        if (t.getCasella(pos).getPropietario() == "") {
+        if (t.getCasellaByPos(pos).getPropietario() == "") {
             // controllare se il giocatore ha abbastanza soldi
-            if (t.getCasella(pos).getPrezzo() <= g.getSoldi()) {
+            if (t.getCasellaByPos(pos).getPrezzo() <= g.getSoldi()) {
                 // sottraggo i soldi al giocatore
-                g.setSoldi(g.getSoldi() - t.getCasella(pos).getPrezzo());
+                g.setSoldi(g.getSoldi() - t.getCasellaByPos(pos).getPrezzo());
                 // aggiungo la casella alla lista delle proprieta del giocatore
-                g.addProprieta(t.getCasella(pos).getID());
+                g.addProprieta(t.getCasellaByPos(pos).getID());
                 // imposto il proprietario della casella
-                t.getCasella(pos).setPropietario(g.getID());
+                t.getCasellaByPos(pos).setPropietario(g.getID());
                 // rispondo al client
                 s = "4;" + currentPlayer().toString();
             } else {
@@ -154,6 +159,30 @@ public class Partita {
             }
         } else {
             s = "0;Casella non acquistabile";
+        }
+
+        return s;
+    }
+
+    public String ipotecaCasella(String id) {
+        Player g = currentPlayer();
+        String s = "";
+
+        // controllo se il giocatore possiede la casella
+        if (g.hasProprieta(id)) {
+            // controllo se la casella è ipotecata
+            if (!t.getCassellaByID(id).isIpotecata()) {
+                // ipoteco la casella
+                t.getCassellaByID(id).setIpotecata(true);
+                // aggiungo i soldi al giocatore
+                g.setSoldi(g.getSoldi() + t.getCassellaByID(id).getValIpoteca());
+                // rispondo al client
+                s = "6;" + currentPlayer().toString();
+            } else {
+                s = "0;Casella già ipotecata";
+            }
+        } else {
+            s = "0;Non possiedi questa casella";
         }
 
         return s;

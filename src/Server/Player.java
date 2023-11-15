@@ -99,4 +99,12 @@ public class Player {
     public int getTurniPrigione() {
         return turniPrigione;
     }
+
+    public void resetTurniPrigione() {
+        turniPrigione = 0;
+    }
+
+    public boolean hasProprieta(String idProprieta) {
+        return proprieta.contains(idProprieta);
+    }
 }

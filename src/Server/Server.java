@@ -50,7 +50,8 @@ public class Server {
                         risposta = p.changeTurn();
                         break;
                     case "6":
-                    
+                        // ipoteca una casella
+                        risposta = p.ipotecaCasella(campi[1]);
                         break;
                 }
                 System.out.println("Risposta: " + risposta);

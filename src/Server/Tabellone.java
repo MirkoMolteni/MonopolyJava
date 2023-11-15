@@ -8,8 +8,12 @@ public class Tabellone {
     public Tabellone() {
     }
 
-    public Carta getCasella(int pos) {
+    public Carta getCasellaByPos(int pos) {
         return caselle[pos];
+    }
+
+    public Carta getCassellaByID(String id) {
+        return caselle[Integer.parseInt(id.split("#")[1])];
     }
 
     public Carta[] getCaselle() {
