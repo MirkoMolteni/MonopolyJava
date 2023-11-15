@@ -2,7 +2,7 @@ package src.Server;
 
 import java.util.ArrayList;
 
-public class Giocatore {
+public class Player {
     private String ID;
     private String nome;
     private int posizione;
@@ -10,15 +10,19 @@ public class Giocatore {
     // lista degli id delle proprieta possedute
     ArrayList<String> proprieta;
     // lista degli id delle carte uscite di prigione possedute
-    ArrayList<String> uscitePrigione;
+    String uscitePrigione[];
 
-    public Giocatore(String nome) {
+    private int turniPrigione = 0;
+
+    public Player(String nome) {
         this.ID = "P#" + Settings.PLAYER_COUNT++;
         this.nome = nome;
         this.soldi = Settings.STARTING_MONEY;
         this.posizione = 0;
         this.proprieta = new ArrayList<>();
-        this.uscitePrigione = new ArrayList<>();
+        this.uscitePrigione = new String[2];
+        uscitePrigione[0] = "";
+        uscitePrigione[1] = "";
     }
 
     public String toString() {
@@ -32,11 +36,12 @@ public class Giocatore {
             }
         }
         s += "]:[";
-        for (String string : uscitePrigione) {
-            if (uscitePrigione.indexOf(string) == 0) {
-                s += string;
+
+        for (int i = 0; i < uscitePrigione.length; i++) {
+            if (i == 0) {
+                s += uscitePrigione[i];
             } else {
-                s += "," + string;
+                s += "," + uscitePrigione[i];
             }
         }
         s += "]}";
@@ -65,5 +70,33 @@ public class Giocatore {
 
     public void addProprieta(String idProprieta) {
         this.proprieta.add(idProprieta);
+    }
+
+    public void addUscitaPrigione(String idUscitaPrigione) {
+        if (uscitePrigione[0] == "") {
+            uscitePrigione[0] = idUscitaPrigione;
+        } else {
+            uscitePrigione[1] = idUscitaPrigione;
+        }
+    }
+
+    public void removeUscitaPrigione() {
+        if (uscitePrigione[0] != "") {
+            uscitePrigione[0] = "";
+        } else {
+            uscitePrigione[1] = "";
+        }
+    }
+
+    public boolean hasUscitaPrigione() {
+        return uscitePrigione[0] != "" || uscitePrigione[1] != "";
+    }
+
+    public void addTurnoPrigione() {
+        turniPrigione++;
+    }
+
+    public int getTurniPrigione() {
+        return turniPrigione;
     }
 }

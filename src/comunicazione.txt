@@ -7,13 +7,14 @@ Utilizziamo dei numeri per decidere cosa fare
 2 - Avvia partita
     Il client invia: 2;
     Il server risponde: 0;TESTOERRORE = errore
-                        2;[{INFOPLAYER1},{INFOPLAYER2}]
+                    	2;[{INFOPLAYER1},{INFOPLAYER2}]
 3 - Lancia i dadi
     Il client invia: 3;
     Il server risponde: 0;TESTOERRORE = errore
-                        3;DADO1;DADO2;{INFOPLAYERAGGIORNATE}
+                        3-0;DADO1;DADO2;{INFOPLAYERAGGIORNATE}			(quando capita su una proprieta)
+                        3-1;DADO1;DADO2;{INFOPLAYERAGGIORNATE};TESTO	(quando capita sulle altre caselle)
 4 - Acquisto casella
-    Il client invia: 4;IDPLAYER
+    Il client invia: 4;
     Il server risponde: 0;TESTOERRORE = errore
                         4;{INFOPLAYERAGGIORNATE}
 5 - Termina turno

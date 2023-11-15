@@ -9,4 +9,12 @@ public class Imprevisto extends Carta {
         this.caso = caso;
         this.value = value;
     }
+
+    public int getCaso() {
+        return caso;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }
