@@ -141,6 +141,7 @@ public class Partita {
         String s = "";
 
         // TODO:controllare se la casella è ipotecata
+        // TODO: controllare se la casella è la prigione
 
         // controllare se la casella è acquistabile
         if (t.getCasellaByPos(pos).getPropietario() == "") {
@@ -194,13 +195,21 @@ public class Partita {
     }
 
     private Player currentPlayer() {
-        return giocatori.get("P#" + (turno % Settings.PLAYER_COUNT));
+        String x;
+        if (turno > Settings.PLAYER_COUNT) {
+            x = (turno - Settings.PLAYER_COUNT) + "";
+            turno = 1;
+        } else {
+            x = turno + "";
+        }
+        return giocatori.get("P#" + x);
     }
 
     private void eseguiProbabilita(Probabilita p) {
+        // TODO: implementare le probabilita
     }
 
     private void eseguiImprevisto(Imprevisto i) {
-
+        // TODO: implementare gli imprevisti
     }
 }

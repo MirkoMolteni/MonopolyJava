@@ -15,7 +15,7 @@ public class Player {
     private int turniPrigione = 0;
 
     public Player(String nome) {
-        this.ID = "P#" + Settings.PLAYER_COUNT++;
+        this.ID = "P#" + ++Settings.PLAYER_COUNT;
         this.nome = nome;
         this.soldi = Settings.STARTING_MONEY;
         this.posizione = 0;
