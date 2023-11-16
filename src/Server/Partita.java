@@ -141,7 +141,12 @@ public class Partita {
         String s = "";
 
         // TODO:controllare se la casella è ipotecata
-        // TODO: controllare se la casella è la prigione
+
+        // controllo se il player è in transito sulla prigione
+        if (pos == 10) {
+            s = "0;Non puoi acquistare la prigione";
+            return s;
+        }
 
         // controllare se la casella è acquistabile
         if (t.getCasellaByPos(pos).getPropietario() == "") {
