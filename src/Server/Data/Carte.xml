@@ -461,8 +461,8 @@ GPG.. = vai in prigione
         1 = jump alla casella nel value
             caso vai alla x successiva: x#00 e il moltiplicatore lo sa il server
         2 = paga case e alberghi, value = case:alberghi
-        3 = paga ogni giocatore, value = soldi: (se soldi positivi li prendo, se negativi pago)
-        4 = avanza di tot passi, value = numPassi: (se numPassi è negativo, vado indietro)
+        3 = paga ogni giocatore, value = soldi (se soldi positivi li prendo, se negativi pago)
+        4 = avanza di tot passi, value = numPassi (se numPassi è negativo, vado indietro)
         5 = uscita dalla prigione
     -->
     <Imprevisti>
@@ -538,7 +538,7 @@ GPG.. = vai in prigione
             <Valore>0</Valore>
             <Action>
                 <Case>3</Case>
-                <Value>-50:</Value>
+                <Value>-50</Value>
             </Action>
         </Carta>
         <Carta ID="IM#09">
@@ -662,7 +662,7 @@ GPG.. = vai in prigione
             <Valore>0</Valore>
             <Action>
                 <Case>3</Case>
-                <Value>+10;</Value>
+                <Value>+10</Value>
             </Action>
         </Carta>
         <Carta ID="PR#08">

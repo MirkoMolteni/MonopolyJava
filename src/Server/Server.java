@@ -39,7 +39,7 @@ public class Server {
                         break;
                     case "3":
                         // lancio i dadi
-                        risposta = p.rollDice();
+                        risposta = p.rollDiceAndMove();
                         break;
                     case "4":
                         // acquista casella
@@ -60,7 +60,7 @@ public class Server {
             }
             // System.out.println("Connessione con " + clientSocket.getInetAddress() + "
             // terminata.");
-            // in.close();
+            in.close();
             // out.close();
             // clientSocket.close();
         }

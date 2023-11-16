@@ -8,11 +8,14 @@ public class Player {
     private int posizione;
     private int soldi;
     // lista degli id delle proprieta possedute
-    ArrayList<String> proprieta;
+    private ArrayList<String> proprieta;
     // lista degli id delle carte uscite di prigione possedute
-    String uscitePrigione[];
+    private String uscitePrigione[];
 
-    private int turniPrigione = 0;
+    private int turniPrigione;
+
+    private int countCase;
+    private int countAlberghi;
 
     public Player(String nome) {
         this.ID = "P#" + ++Settings.PLAYER_COUNT;
@@ -23,6 +26,10 @@ public class Player {
         this.uscitePrigione = new String[2];
         uscitePrigione[0] = "";
         uscitePrigione[1] = "";
+        turniPrigione = 0;
+        countCase = 0;
+        countAlberghi = 0;
+
     }
 
     public String toString() {
@@ -106,5 +113,21 @@ public class Player {
 
     public boolean hasProprieta(String idProprieta) {
         return proprieta.contains(idProprieta);
+    }
+
+    public int getCountCase() {
+        return countCase;
+    }
+
+    public int getCountAlberghi() {
+        return countAlberghi;
+    }
+
+    public void addCasa(int count) {
+        countCase += count;
+    }
+
+    public void addAlbergo(int count) {
+        countAlberghi += count;
     }
 }

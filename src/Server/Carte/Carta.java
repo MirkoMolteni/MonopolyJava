@@ -55,4 +55,8 @@ public class Carta {
     public int getValIpoteca() {
         return 0;
     }
+
+    public int getPedaggio() {
+        return 0;
+    }
 }
