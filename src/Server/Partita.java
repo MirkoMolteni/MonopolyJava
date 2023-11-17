@@ -316,7 +316,24 @@ public class Partita {
 
                 break;
             case 3:
-                // TODO: paga +/- ogni giocatore
+                // paga +/- ogni giocatore
+                if (Integer.parseInt(value) > 0) {
+                    // ogni giocatore paga al player
+                    for (Player g : giocatori.values()) {
+                        if (g.getID() != currentPlayer.getID()) {
+                            g.setSoldi(g.getSoldi() - Integer.parseInt(value));
+                            currentPlayer.setSoldi(currentPlayer.getSoldi() + Integer.parseInt(value));
+                        }
+                    }
+                } else {
+                    // il player paga ogni giocatore
+                    for (Player g : giocatori.values()) {
+                        if (g.getID() != currentPlayer.getID()) {
+                            currentPlayer.setSoldi(currentPlayer.getSoldi() - Integer.parseInt(value));
+                            g.setSoldi(g.getSoldi() + Integer.parseInt(value));
+                        }
+                    }
+                }
                 break;
             case 4:
                 // avanza di tot caselle
@@ -342,8 +359,151 @@ public class Partita {
     }
 
     private String eseguiProbabilita(Probabilita p) {
-        // TODO: implementare le probabilita
         String s = "";
+        int caso = p.getCaso();
+        String value = p.getValue();
+        int posP = currentPlayer.getPosizione();
+        switch (caso) {
+            case 1:
+                // vai alla casella successiva
+                String typeCasella = value.split("#")[0];
+                // se è una prigione, non ritira il bonus giro completo
+                if (typeCasella.equals("PG")) {
+                    currentPlayer.setPosizione(10);
+                } else {
+
+                    // caso della casella successiva
+                    if (Integer.parseInt(value.split("#")[1]) == 0 && !typeCasella.equals("V")) {
+                        // se è una railroad, pago il doppio del pedaggio
+                        if (typeCasella.equals("R")) {
+                            // trovo la posizione della prossima railroad 5-15-25-35
+                            int posR = 0;
+                            if (posP < 5) {
+                                posR = 5;
+                            } else if (posP < 15) {
+                                posR = 15;
+                            } else if (posP < 25) {
+                                posR = 25;
+                            } else if (posP < 35) {
+                                posR = 35;
+                            } else {
+                                posR = 5;
+                            }
+
+                            // se per andare alla casella indicata devo passare dal via, ritiro il bonus
+                            if (posR == 5 && posP >= 35) {
+                                currentPlayer.setSoldi(currentPlayer.getSoldi() + 200);
+                            }
+
+                            // muovo il player
+                            currentPlayer.setPosizione(posR);
+
+                            // controllo se la casella ha già un proprietario
+                            if (t.getCasellaByPos(posP).getPropietario() != "") {
+                                // se ha un proprietario, paga il pedaggio
+                                int importo = currentPlayer.getSoldi()
+                                        - t.getCasellaByPos(posP).getPedaggio() * 2;
+                                currentPlayer.setSoldi(importo);
+                                s = "Hai pagato " + importo + "€ di pedaggio";
+                            }
+                        }
+                        // se è una società, pago 10 volte il tiro dei dadi
+                        if (typeCasella.equals("S")) {
+                            // trovo la posizione della prossima società 12-28
+                            int posS = 0;
+                            if (posP < 12) {
+                                posS = 12;
+                            } else if (posP < 28) {
+                                posS = 28;
+                            } else {
+                                posS = 12;
+                            }
+
+                            // se per andare alla casella indicata devo passare dal via, ritiro il bonus
+                            if (posS == 12 && posP >= 28) {
+                                currentPlayer.setSoldi(currentPlayer.getSoldi() + 200);
+                            }
+
+                            // muovo il player
+                            currentPlayer.setPosizione(posS);
+
+                            // controllo se la casella ha già un proprietario
+                            if (t.getCasellaByPos(posP).getPropietario() != "") {
+                                // se ha un proprietario, paga 10 volte il lancio dei dadi
+                                int dice1Roll = (int) (Math.random() * Settings.MAX_ROLL) + 1;
+                                int dice2Roll = (int) (Math.random() * Settings.MAX_ROLL) + 1;
+                                int importo = currentPlayer.getSoldi() - ((dice1Roll + dice2Roll) * 10);
+                                currentPlayer.setSoldi(importo);
+                                s = "Hai rollato" + (dice1Roll + dice2Roll) + " e hai pagato " + importo
+                                        + "€ di pedaggio";
+                            }
+                        }
+                    } else {
+                        // se per andare alla casella indicata devo passare dal via, ritiro il bonus
+                        if (posP > Integer.parseInt(value.split("#")[1])) {
+                            currentPlayer.setSoldi(currentPlayer.getSoldi() + 200);
+                        }
+                        // muovo il player
+                        currentPlayer.setPosizione(Integer.parseInt(value.split("#")[1]));
+
+                        // controllo se la casella ha già un proprietario
+                        if (t.getCasellaByPos(posP).getPropietario() != "") {
+                            // se ha un proprietario, paga il pedaggio
+                            currentPlayer.setSoldi(currentPlayer.getSoldi()
+                                    - t.getCasellaByPos(posP).getPedaggio());
+                        }
+                    }
+                }
+                break;
+            case 2:
+                // paga per ogni casa e albergo
+                int impCase = Integer.parseInt(value.split(":")[0]);
+                int impAlberghi = Integer.parseInt(value.split(":")[1]);
+
+                currentPlayer.setSoldi(currentPlayer.getSoldi() - (impCase * currentPlayer.getCountCase())
+                        - (impAlberghi * currentPlayer.getCountAlberghi()));
+
+                break;
+            case 3:
+                // paga +/- ogni giocatore
+                if (Integer.parseInt(value) > 0) {
+                    // ogni giocatore paga al player
+                    for (Player g : giocatori.values()) {
+                        if (g.getID() != currentPlayer.getID()) {
+                            g.setSoldi(g.getSoldi() - Integer.parseInt(value));
+                            currentPlayer.setSoldi(currentPlayer.getSoldi() + Integer.parseInt(value));
+                        }
+                    }
+                } else {
+                    // il player paga ogni giocatore
+                    for (Player g : giocatori.values()) {
+                        if (g.getID() != currentPlayer.getID()) {
+                            currentPlayer.setSoldi(currentPlayer.getSoldi() - Integer.parseInt(value));
+                            g.setSoldi(g.getSoldi() + Integer.parseInt(value));
+                        }
+                    }
+                }
+                break;
+            case 4:
+                // avanza di tot caselle
+                // se per andare alla casella indicata devo passare dal via, ritiro il bonus
+                if (posP + Integer.parseInt(value) > 39) {
+                    currentPlayer.setSoldi(currentPlayer.getSoldi() + 200);
+                }
+                // muovo il player
+                currentPlayer.setPosizione(posP + Integer.parseInt(value));
+                break;
+            case 5:
+                // esci dalla prigione
+                currentPlayer.addUscitaPrigione(p.getID());
+                break;
+            default:
+                break;
+        }
+
+        // tolgo la carta dall'array
+        prob.remove(p);
+
         return s;
     }
 
