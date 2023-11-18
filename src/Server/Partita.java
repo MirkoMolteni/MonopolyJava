@@ -21,6 +21,7 @@ public class Partita {
     public String addGiocatore(Player g) {
         String id = g.getID();
         giocatori.put(id, g);
+        currentPlayer = giocatori.get("P#1");
         return "1;";
     }
 
@@ -43,20 +44,20 @@ public class Partita {
         // TODO: implementare la logica del doppio
 
         // controllo se il player è in prigione
-        if (currentPlayer.getPosizione() == 10) {
+        if (currentPlayer.getPosizione() == 10 && currentPlayer.InPrigione()) {
             // controllo se ha una carta uscita prigione
             if (currentPlayer.hasUscitaPrigione()) {
                 // usa la carta
                 currentPlayer.removeUscitaPrigione();
                 // lo sposto in base al tiro dei dadi
-                currentPlayer.setPosizione(currentPlayer.getPosizione() + dice1Roll + dice2Roll);
+                movePlayer(false, dice2Roll + dice1Roll);
                 return "3-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
                         + ";Sei uscito di prigione tramite una carta uscita prigione";
             } else {
                 // se non ha una carta, controllo se ha fatto un doppio
                 if (dice1Roll == dice2Roll) {
                     // se ha fatto un doppio lo sposto in base al tiro dei dadi
-                    currentPlayer.setPosizione(currentPlayer.getPosizione() + dice1Roll + dice2Roll);
+                    movePlayer(false, dice2Roll + dice1Roll);
                     return "3-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
                             + ";Sei uscito di prigione tramite un doppio";
                 } else {
@@ -73,7 +74,7 @@ public class Partita {
         }
 
         // aggiorno la posizione del giocatore
-        currentPlayer.setPosizione(currentPlayer.getPosizione() + dice1Roll + dice2Roll);
+        movePlayer(false, dice2Roll + dice1Roll);
         String s = "";
         // controllo la casella su cui è finito il player
         String typeCasella = t.getTypeCasella(currentPlayer.getPosizione());
@@ -123,7 +124,7 @@ public class Partita {
                     break;
                 case "GPG":
                     // sposto il player in prigione
-                    currentPlayer.setPosizione(10);
+                    movePlayer(true, 10);
                     s = "3-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
                             + ";Sei finito in prigione";
                     break;
@@ -215,12 +216,15 @@ public class Partita {
         String value = i.getValue();
         int posP = currentPlayer.getPosizione();
         switch (caso) {
+            case 0:
+                currentPlayer.setSoldi(currentPlayer.getSoldi() + i.getPrezzo());
+                break;
             case 1:
                 // vai alla casella successiva
                 String typeCasella = value.split("#")[0];
                 // se è una prigione, non ritira il bonus giro completo
                 if (typeCasella.equals("PG")) {
-                    currentPlayer.setPosizione(10);
+                    movePlayer(true, 10);
                 } else {
 
                     // caso della casella successiva
@@ -247,7 +251,7 @@ public class Partita {
                             }
 
                             // muovo il player
-                            currentPlayer.setPosizione(posR);
+                            movePlayer(true, posR);
 
                             // controllo se la casella ha già un proprietario
                             if (t.getCasellaByPos(posP).getPropietario() != "") {
@@ -276,7 +280,7 @@ public class Partita {
                             }
 
                             // muovo il player
-                            currentPlayer.setPosizione(posS);
+                            movePlayer(true, posS);
 
                             // controllo se la casella ha già un proprietario
                             if (t.getCasellaByPos(posP).getPropietario() != "") {
@@ -295,14 +299,7 @@ public class Partita {
                             currentPlayer.setSoldi(currentPlayer.getSoldi() + 200);
                         }
                         // muovo il player
-                        currentPlayer.setPosizione(Integer.parseInt(value.split("#")[1]));
-
-                        // controllo se la casella ha già un proprietario
-                        if (t.getCasellaByPos(posP).getPropietario() != "") {
-                            // se ha un proprietario, paga il pedaggio
-                            currentPlayer.setSoldi(currentPlayer.getSoldi()
-                                    - t.getCasellaByPos(posP).getPedaggio());
-                        }
+                        movePlayer(false, Integer.parseInt(value.split("#")[1]));
                     }
                 }
                 break;
@@ -342,7 +339,7 @@ public class Partita {
                     currentPlayer.setSoldi(currentPlayer.getSoldi() + 200);
                 }
                 // muovo il player
-                currentPlayer.setPosizione(posP + Integer.parseInt(value));
+                movePlayer(false, Integer.parseInt(value));
                 break;
             case 5:
                 // esci dalla prigione
@@ -364,12 +361,15 @@ public class Partita {
         String value = p.getValue();
         int posP = currentPlayer.getPosizione();
         switch (caso) {
+            case 0:
+                currentPlayer.setSoldi(currentPlayer.getSoldi() + p.getPrezzo());
+                break;
             case 1:
                 // vai alla casella successiva
                 String typeCasella = value.split("#")[0];
                 // se è una prigione, non ritira il bonus giro completo
                 if (typeCasella.equals("PG")) {
-                    currentPlayer.setPosizione(10);
+                    movePlayer(true, 10);
                 } else {
 
                     // caso della casella successiva
@@ -396,7 +396,7 @@ public class Partita {
                             }
 
                             // muovo il player
-                            currentPlayer.setPosizione(posR);
+                            movePlayer(true, posR);
 
                             // controllo se la casella ha già un proprietario
                             if (t.getCasellaByPos(posP).getPropietario() != "") {
@@ -425,7 +425,7 @@ public class Partita {
                             }
 
                             // muovo il player
-                            currentPlayer.setPosizione(posS);
+                            movePlayer(true, posS);
 
                             // controllo se la casella ha già un proprietario
                             if (t.getCasellaByPos(posP).getPropietario() != "") {
@@ -444,7 +444,7 @@ public class Partita {
                             currentPlayer.setSoldi(currentPlayer.getSoldi() + 200);
                         }
                         // muovo il player
-                        currentPlayer.setPosizione(Integer.parseInt(value.split("#")[1]));
+                        movePlayer(true, Integer.parseInt(value.split("#")[1]));
 
                         // controllo se la casella ha già un proprietario
                         if (t.getCasellaByPos(posP).getPropietario() != "") {
@@ -491,7 +491,7 @@ public class Partita {
                     currentPlayer.setSoldi(currentPlayer.getSoldi() + 200);
                 }
                 // muovo il player
-                currentPlayer.setPosizione(posP + Integer.parseInt(value));
+                movePlayer(false, Integer.parseInt(value));
                 break;
             case 5:
                 // esci dalla prigione
@@ -507,4 +507,24 @@ public class Partita {
         return s;
     }
 
+    private void movePlayer(boolean goTo, int pos) {
+        // metodo che muove il player
+        if (goTo)
+            currentPlayer.setPosizione(pos);
+        else
+            currentPlayer.setPosizione(currentPlayer.getPosizione() + pos);
+
+        checkPosizione();
+    }
+
+    private void checkPosizione() {
+        // metodo che controlla la posizione del player per capire se deve fare qualcosa
+
+        // controllo se la casella ha già un proprietario
+        if (t.getCasellaByPos(currentPlayer.getPosizione()).getPropietario() != "") {
+            // se ha un proprietario, paga il pedaggio
+            currentPlayer.setSoldi(currentPlayer.getSoldi()
+                    - t.getCasellaByPos(currentPlayer.getPosizione()).getPedaggio());
+        }
+    }
 }

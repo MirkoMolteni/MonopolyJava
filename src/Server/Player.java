@@ -13,6 +13,7 @@ public class Player {
     private String uscitePrigione[];
 
     private int turniPrigione;
+    private boolean inPrigione;
 
     private int countCase;
     private int countAlberghi;
@@ -24,11 +25,12 @@ public class Player {
         this.posizione = 0;
         this.proprieta = new ArrayList<>();
         this.uscitePrigione = new String[2];
-        uscitePrigione[0] = "";
-        uscitePrigione[1] = "";
-        turniPrigione = 0;
-        countCase = 0;
-        countAlberghi = 0;
+        this.inPrigione = false;
+        this.uscitePrigione[0] = "";
+        this.uscitePrigione[1] = "";
+        this.turniPrigione = 0;
+        this.countCase = 0;
+        this.countAlberghi = 0;
 
     }
 
@@ -109,6 +111,14 @@ public class Player {
 
     public void resetTurniPrigione() {
         turniPrigione = 0;
+    }
+
+    public boolean InPrigione() {
+        return inPrigione;
+    }
+
+    public void setInPrigione(boolean isInPrigione) {
+        this.inPrigione = isInPrigione;
     }
 
     public boolean hasProprieta(String idProprieta) {
