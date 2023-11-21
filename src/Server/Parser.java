@@ -11,7 +11,24 @@ import org.w3c.dom.NodeList;
 
 import src.Server.Carte.*;
 
+/**
+ * La classe Parser è responsabile del parsing del file XML contenente i dati di
+ * gioco e del popolamento delle strutture dati necessarie.
+ */
 public class Parser {
+
+    /**
+     * Parsa il file XML contenente le carte di gioco e popola gli array forniti con
+     * i dati parsati.
+     *
+     * @param mappa  Un array di Casella objects rappresentanti le caselle del
+     *               tabellone
+     * @param imprev Un ArrayList di Imprevisto objects rappresentanti le carte
+     *               imprevisto
+     * @param prob   Un ArrayList di Probabilita objects rappresentanti le carte
+     *               probabilità
+     * @throws Exception Se si verifica un errore durante il parsing del file XML
+     */
     public static void parseCarteXml(Carta[] mappa, ArrayList<Imprevisto> imprev,
             ArrayList<Probabilita> prob)
             throws Exception {
@@ -24,6 +41,7 @@ public class Parser {
         NodeList imprevisti = root.getElementsByTagName("Imprevisti");
         NodeList probabilita = root.getElementsByTagName("Probabilita");
 
+        // parse delle caselle
         for (int j = 0; j < place.getLength(); j++) {
             Element e = (Element) place.item(j);
             NodeList caselle = e.getElementsByTagName("Casella");
@@ -65,6 +83,7 @@ public class Parser {
             }
         }
 
+        // parse degli imprevisti
         for (int j = 0; j < imprevisti.getLength(); j++) {
             Element e = (Element) imprevisti.item(j);
             NodeList impr = e.getElementsByTagName("Carta");
@@ -79,6 +98,7 @@ public class Parser {
             }
         }
 
+        // parse delle probabilità
         for (int j = 0; j < probabilita.getLength(); j++) {
             Element e = (Element) probabilita.item(j);
             NodeList probab = e.getElementsByTagName("Carta");

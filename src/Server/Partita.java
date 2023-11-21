@@ -6,6 +6,10 @@ import java.util.Map.Entry;
 
 import src.Server.Carte.*;
 
+/**
+ * La classe Partita rappresenta una sessione di gioco di Monopoly.
+ * Gestisce il tabellone di gioco, i giocatori, i turni e la logica di gioco.
+ */
 public class Partita {
     private Tabellone t = new Tabellone();
     private ArrayList<Imprevisto> imprev = new ArrayList<Imprevisto>();
@@ -14,10 +18,23 @@ public class Partita {
     private int turno = 1;
     private Player currentPlayer = null;
 
+    /**
+     * Rappresenta una sessione di gioco di Monopoly.
+     * Questa classe inizializza il gioco parsando i file XML per le carte e le
+     * probabilità.
+     * 
+     * @throws Exception Se si verifica un errore durante il parsing del file XML
+     */
     public Partita() throws Exception {
         Parser.parseCarteXml(t.getCaselle(), imprev, prob);
     }
 
+    /**
+     * Aggiungi un giocatore alla partita.
+     * 
+     * @param g Il giocatore da aggiungere
+     * @return Una stringa contenente il codice di risposta e i dati del giocatore
+     */
     public String addGiocatore(Player g) {
         String id = g.getID();
         giocatori.put(id, g);
@@ -25,6 +42,11 @@ public class Partita {
         return "1;";
     }
 
+    /**
+     * Inzia la partita e ritorna una stringa contenente lo stato del gioco.
+     * 
+     * @return Una stringa contenente il codice di risposta e i dati dei giocatori
+     */
     public String startGame() {
         Settings.GAME_STATUS = 0;
         String s = "2";
@@ -37,6 +59,11 @@ public class Partita {
         return s;
     }
 
+    /**
+     * Lancia i dadi e muove il giocatore in base al risultato del lancio dei dadi.
+     * 
+     * @return Il risultato del lancio dei dadi e lo spostamento del giocatore come
+     */
     public String rollDiceAndMove() {
         // lancio i dadi
         int dice1Roll = (int) (Math.random() * Settings.MAX_ROLL) + 1;
@@ -139,6 +166,23 @@ public class Partita {
         return s;
     }
 
+    /**
+     * Questo metodo viene utilizzato per gestire il processo di acquisto di una
+     * proprietà sulla scacchiera di gioco.
+     * Controlla se il giocatore corrente può acquistare la proprietà e esegue le
+     * azioni necessarie se possibile.
+     * 
+     * @return Una stringa che rappresenta il risultato del processo di acquisto. Il
+     *         formato della stringa è il seguente:
+     *         - "0;Non puoi acquistare la prigione" se il giocatore è nella cella
+     *         della prigione e non può acquistarla.
+     *         - "0;Soldi insufficienti" se il giocatore non ha abbastanza soldi per
+     *         acquistare la proprietà.
+     *         - "0;Casella non acquistabile" se la proprietà non è disponibile per
+     *         l'acquisto.
+     *         - "4;[currentPlayer.toString()]" se la proprietà viene acquistata con
+     *         successo dal giocatore.
+     */
     public String buyCasella() {
         Player g = currentPlayer;
         int pos = g.getPosizione();
@@ -174,6 +218,21 @@ public class Partita {
         return s;
     }
 
+    /**
+     * Questo metodo consente al giocatore corrente di ipotecare una proprietà sulla
+     * scacchiera di gioco.
+     * 
+     * @param id L'ID della proprietà da ipotecare.
+     * @return Una stringa che rappresenta la risposta all'azione di ipoteca.
+     *         - Se la proprietà viene ipotecata con successo, la stringa inizierà
+     *         con
+     *         "6;"
+     *         seguito dalle informazioni aggiornate del giocatore corrente.
+     *         - Se la proprietà è già ipotecata, la stringa inizierà con "0;Casella
+     *         già ipotecata".
+     *         - Se il giocatore non possiede la proprietà, la stringa inizierà con
+     *         "0;Non possiedi questa casella".
+     */
     public String ipotecaCasella(String id) {
         String s = "";
 
@@ -197,6 +256,11 @@ public class Partita {
         return s;
     }
 
+    /**
+     * Cambia il turno e restituisce una rappresentazione stringa del nuovo turno.
+     * 
+     * @return Una rappresentazione stringa del nuovo turno.
+     */
     public String changeTurn() {
         turno++;
         String x;
@@ -210,6 +274,13 @@ public class Partita {
         return "5;";
     }
 
+    /**
+     * Esegue l'Imprevisto dato e restituisce un messaggio String.
+     * 
+     * @param i L'Imprevisto da eseguire.
+     * 
+     * @return Un messaggio String che descrive il risultato dell'esecuzione
+     */
     private String eseguiImprevisto(Imprevisto i) {
         String s = "";
         int caso = i.getCaso();
@@ -355,6 +426,12 @@ public class Partita {
         return s;
     }
 
+    /**
+     * Esegue la Probabilita data e restituisce un messaggio String.
+     * 
+     * @param p La Probabilita da eseguire.
+     * @return Un messaggio String che descrive il risultato dell'esecuzione della
+     */
     private String eseguiProbabilita(Probabilita p) {
         String s = "";
         int caso = p.getCaso();
@@ -507,6 +584,14 @@ public class Partita {
         return s;
     }
 
+    /**
+     * Ritorna una stringa che rappresenta la lista dei giocatori.
+     * La stringa contiene il numero di giocatori seguito dai loro nomi, separati da
+     * virgole.
+     * Il formato della stringa è "7;[nome1,nome2,nome3,...]".
+     * 
+     * @return una stringa che rappresenta la lista dei giocatori
+     */
     public String getListaGiocatori() {
         String s = "7;[";
 
@@ -518,6 +603,15 @@ public class Partita {
         return s.replace(",]", "]");
     }
 
+    /**
+     * Muovi il giocatore alla posizione specificata.
+     * 
+     * @param goTo true se il giocatore deve andare direttamente alla posizione
+     *             specificata, false se il giocatore deve avanzare di un numero
+     *             specificato di posizioni.
+     * @param pos  la posizione in cui spostare il giocatore o il numero di
+     *             posizioni da avanzare.
+     */
     private void movePlayer(boolean goTo, int pos) {
         // metodo che muove il player
         if (goTo)
@@ -528,6 +622,12 @@ public class Partita {
         checkPosizione();
     }
 
+    /**
+     * Metodo che controlla la posizione del giocatore per determinare se deve fare
+     * qualcosa.
+     * Se la casella in cui si trova il giocatore ha un proprietario, il giocatore
+     * paga il pedaggio.
+     */
     private void checkPosizione() {
         // metodo che controlla la posizione del player per capire se deve fare qualcosa
 
