@@ -2,13 +2,12 @@ package src.client;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class mainMenu extends JFrame {
+    int pedinaIndex = 0;
     public mainMenu(){
         // ottengo l'istanza di netUtil - init
         netUtil net = netUtil.getInstance();
@@ -22,8 +21,8 @@ public class mainMenu extends JFrame {
 
         // creazione pannello sfondo - immagine
         ImageIcon backgroundImage = new ImageIcon("src/client/resources/bg.png");
-        JLabel backgroundLabel = new JLabel(backgroundImage);
-        backgroundLabel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+        JLabel mainLabel = new JLabel(backgroundImage);
+        mainLabel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
 
         // creazione immagine logo
         ImageIcon logoImage = new ImageIcon("src/client/resources/logo.png");
@@ -32,12 +31,14 @@ public class mainMenu extends JFrame {
 
         // creazione layoutmanager
         GridBagLayout layout = new GridBagLayout();
-        backgroundLabel.setLayout(layout);
+        mainLabel.setLayout(layout);
 
         // creazione label
         JLabel labelIP = new JLabel("IP:");
         JLabel labelPorta = new JLabel("Porta:");
         JLabel labelUser = new JLabel("Nome:");
+        JLabel labelPedina = new JLabel("Pedina:");
+
 
         // creazione textbox
         JTextField textBoxIP = new JTextField();
@@ -49,8 +50,28 @@ public class mainMenu extends JFrame {
         textBoxPorta.setText("8080");
         textBoxNome.setText("test");
 
+
         // creazione bottone
-        JButton button = new JButton("Connetti");
+        JButton buttonConnetti = new JButton("Entra nel server");
+        buttonConnetti.setBackground(new Color(225, 0, 25));
+        buttonConnetti.setForeground(Color.WHITE);
+        buttonConnetti.setFont(new Font("Tahoma", Font.BOLD, 20));
+
+        // gestione carousel di immagini per selezione pedina
+        JButton buttonCambia = new JButton("cambia pedina");
+        buttonCambia.setBackground(new Color(176, 0, 20));
+        buttonCambia.setForeground(Color.WHITE);
+        buttonCambia.setFont(new Font("Tahoma", Font.PLAIN, 15));
+
+        ImageIcon pedine[] = new ImageIcon[clientConfig.nPedine];
+        for(int i = 0; i < pedine.length; i++){
+            pedine[i] = new ImageIcon("src/client/resources/pedine/" + i + ".png");
+            pedine[i].getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        }
+        ImageIcon tmp = new ImageIcon(pedine[0].getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        JLabel pedinaLabel = new JLabel(tmp);
+        pedinaLabel.setBounds(0, 0, 50, 50);
+
 
         // creazione constraints
         GridBagConstraints constraints = new GridBagConstraints();
@@ -62,41 +83,54 @@ public class mainMenu extends JFrame {
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.gridwidth = 2;
-        backgroundLabel.add(logoLabel, constraints);
+        mainLabel.add(logoLabel, constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 1;
         constraints.gridwidth = 1;
-        backgroundLabel.add(labelIP, constraints);
+        mainLabel.add(labelIP, constraints);
 
         constraints.gridx = 1;
         constraints.gridy = 1;
         constraints.gridwidth = 1;
-        backgroundLabel.add(textBoxIP, constraints);
+        mainLabel.add(textBoxIP, constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 2;
-        backgroundLabel.add(labelPorta, constraints);
+        mainLabel.add(labelPorta, constraints);
 
         constraints.gridx = 1;
         constraints.gridy = 2;
-        backgroundLabel.add(textBoxPorta, constraints);
+        mainLabel.add(textBoxPorta, constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 3;
-        backgroundLabel.add(labelUser, constraints);
-
+        mainLabel.add(labelUser, constraints);
+        
         constraints.gridx = 1;
         constraints.gridy = 3;
-        backgroundLabel.add(textBoxNome, constraints);
+        mainLabel.add(textBoxNome, constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 4;
+        mainLabel.add(labelPedina, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 4;
+        mainLabel.add(pedinaLabel, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 5;
         constraints.gridwidth = 2;
-        backgroundLabel.add(button, constraints);
+        mainLabel.add(buttonCambia, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 6;
+        constraints.gridwidth = 2;
+        mainLabel.add(buttonConnetti, constraints);
 
         // listener per avviare connessione
-        button.addActionListener(new ActionListener() {
+        buttonConnetti.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // stabilisco la connessione TCP
                 try {
@@ -118,8 +152,21 @@ public class mainMenu extends JFrame {
             }
         });
 
+        // listener per il cambio pedina
+        buttonCambia.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(pedinaIndex == 0){
+                    pedinaIndex = pedine.length - 1;
+                } else {
+                    pedinaIndex--;
+                    ImageIcon tmp = new ImageIcon(pedine[pedinaIndex].getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+                    pedinaLabel.setIcon(tmp);
+                }
+            }
+        });
+
         // aggiungo il panel dello sfondo al frame
-        frame.add(backgroundLabel);
+        frame.add(mainLabel);
 
         // visualizza finestra
         frame.setVisible(true);
