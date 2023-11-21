@@ -21,6 +21,8 @@ public class Player {
     private int countCase;
     private int countAlberghi;
 
+    private int idPedina;
+
     /**
      * Rappresenta un giocatore nel gioco Monopoly.
      * Imposta i valori iniziali del giocatore.
@@ -38,7 +40,7 @@ public class Player {
         this.turniPrigione = 0;
         this.countCase = 0;
         this.countAlberghi = 0;
-
+        this.idPedina = 0;
     }
 
     /**
@@ -79,6 +81,15 @@ public class Player {
      */
     public int getSoldi() {
         return soldi;
+    }
+
+        /**
+     * Ritorna l'ID della pedina, usato dal client per identificare la pedina.
+     *
+     * @return l'ID della pedina, usato dal client per identificare la pedina.
+     */
+    public int getIDPedina() {
+        return idPedina;
     }
 
     /**

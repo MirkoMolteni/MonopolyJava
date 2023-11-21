@@ -111,7 +111,10 @@ public class mainMenu extends JFrame {
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-                //lobby lobby = new lobby();
+                // chiudo la finestra
+                frame.dispose();
+                // avvio la lobby
+                lobby lobby = new lobby();
             }
         });
 

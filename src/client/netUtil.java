@@ -35,11 +35,20 @@ public class netUtil {
 
     // invio e ricevo messaggi
     public void send(String message) {
-        out.println(message);
+        if(out == null) {
+            System.out.println("Errore: connessione non stabilita!");
+            return;
+        }else
+            out.println(message);
+        
     }
 
     public String receive() throws IOException {
-        return in.readLine();
+        if(in == null) {
+            System.out.println("Errore: connessione non stabilita!");
+            return "";
+        }else
+            return in.readLine();
     }
 
     // chiudo la connessione

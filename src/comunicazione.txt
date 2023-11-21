@@ -26,6 +26,5 @@ Utilizziamo dei numeri per decidere cosa fare
     Il server risponde: 0;TESTOERRORE = errore
                         6;{INFOPLAYERAGGIORNATE}
 
-7 - Lista dei nomi dei player
-    Il client invia: 7;
-    Il server risponde: 7;[NOMEPLAYER1,NOMEPLAYER2,...]
+7 - Lista dei nomi dei player e la relativa pedina
+    Il server risponde: 7;NOMEPLAYER1-IDPEDINA1,NOMEPLAYER2-IDPEDINA2...

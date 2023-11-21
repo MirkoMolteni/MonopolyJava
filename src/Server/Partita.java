@@ -585,22 +585,25 @@ public class Partita {
     }
 
     /**
-     * Ritorna una stringa che rappresenta la lista dei giocatori.
-     * La stringa contiene il numero di giocatori seguito dai loro nomi, separati da
-     * virgole.
-     * Il formato della stringa è "7;[nome1,nome2,nome3,...]".
+     * Ritorna una stringa che rappresenta la lista dei giocatori e il relativo ID
+     * pedina.
+     * La stringa contiene il numero di giocatori seguito dai loro nomi e dall'ID
+     * della pedina (usato dal client per gestire la pedina),
+     * separati da virgole.
+     * Il formato della stringa è "7;nome1-id1,nome2-id2,nome3-id3,...".
      * 
-     * @return una stringa che rappresenta la lista dei giocatori
+     * @return una stringa che rappresenta la lista dei giocatori e il rispettivo id
+     *         della pedina
      */
     public String getListaGiocatori() {
-        String s = "7;[";
+        String s = "7;";
 
         for (Entry<String, Player> entry : giocatori.entrySet()) {
             Player value = entry.getValue();
-            s += value.getNome() + ",";
+            s += value.getNome() + "-" + value.getIDPedina() + ",";
         }
         s += "]";
-        return s.replace(",]", "]");
+        return s.replace(",", "");
     }
 
     /**
