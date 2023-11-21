@@ -25,3 +25,7 @@ Utilizziamo dei numeri per decidere cosa fare
     Il client invia: 6;IDCASELLA
     Il server risponde: 0;TESTOERRORE = errore
                         6;{INFOPLAYERAGGIORNATE}
+
+7 - Lista dei nomi dei player
+    Il client invia: 7;
+    Il server risponde: 7;[NOMEPLAYER1,NOMEPLAYER2,...]

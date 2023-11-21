@@ -507,6 +507,17 @@ public class Partita {
         return s;
     }
 
+    public String getListaGiocatori() {
+        String s = "7;[";
+
+        for (Entry<String, Player> entry : giocatori.entrySet()) {
+            Player value = entry.getValue();
+            s += value.getNome() + ",";
+        }
+        s += "]";
+        return s.replace(",]", "]");
+    }
+
     private void movePlayer(boolean goTo, int pos) {
         // metodo che muove il player
         if (goTo)
@@ -527,4 +538,5 @@ public class Partita {
                     - t.getCasellaByPos(currentPlayer.getPosizione()).getPedaggio());
         }
     }
+
 }

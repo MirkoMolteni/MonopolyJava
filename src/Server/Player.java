@@ -61,6 +61,10 @@ public class Player {
         return soldi;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     public void setSoldi(int soldi) {
         this.soldi = soldi;
     }
