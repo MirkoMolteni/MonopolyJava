@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-Legenda ID:
-V.. = via
-PL.. = place
-R.. = railroad
-S.. = società
-PR.. = probabilità
-I.. = imprevisto
-T.. = tassa
-PG.. = prigione
-X.. = parcheggio
-GPG.. = vai in prigione
--->
+
 <Cards>
+    <!-- 
+    Legenda ID:
+    V.. = via
+    PL.. = place
+    R.. = railroad
+    S.. = società
+    PR.. = probabilità
+    I.. = imprevisto
+    T.. = tassa
+    PG.. = prigione
+    X.. = parcheggio
+    GPG.. = vai in prigione
+    -->
     <Place>
         <Casella ID="V#00">
             <Nome>Via!</Nome>
@@ -613,8 +614,8 @@ GPG.. = vai in prigione
             <Nome>Andate avanti fino al "VIA!" e ritirate 200€</Nome>
             <Valore>+200</Valore>
             <Action>
-                <Case>0</Case>
-                <Value>0</Value>
+                <Case>1</Case>
+                <Value>V#00</Value>
             </Action>
         </Carta>
         <Carta ID="PR#02">
