@@ -1,0 +1,40 @@
+@startuml
+title Monopoly - UseCase
+left to right direction
+
+actor Player
+
+rectangle "Monopoly Game" {
+  Player --> (Join Game)
+  Player --> (Start Game)
+  Player --> (Roll Dice)
+  Player --> (Buy Property)
+  Player --> (Pay Rent)
+  Player --> (End Turn)
+
+  (Start Game) --> (Initialize Board)
+  (Start Game) --> (Distribute Money)
+  (Start Game) --> (Assign Properties)
+
+  (Roll Dice) --> (Move Player)
+  (Roll Dice) --> (Handle Special Tiles)
+
+  (Buy Property) --> (Check Availability)
+  (Buy Property) --> (Deduct Money)
+  (Buy Property) --> (Assign Property)
+
+  (Pay Rent) --> (Check Ownership)
+  (Pay Rent) --> (Transfer Money)
+
+  (End Turn) --> (Check Game Over)
+  (End Turn) --> (Next Player)
+
+  (Handle Special Tiles) --> (Handle Chance Card)
+  (Handle Special Tiles) --> (Handle Community Chest Card)
+  (Handle Special Tiles) --> (Handle Jail)
+}
+
+Player --> (View Game Status)
+
+Player --> (View Leaderboard)
+@enduml
