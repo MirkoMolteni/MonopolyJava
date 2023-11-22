@@ -613,7 +613,7 @@ public class Partita {
             s += value.getNome() + "-" + value.getIDPedina() + ",";
         }
         s += "]";
-        return s.replace(",", "");
+        return s.replace(",]", "");
     }
 
     /**

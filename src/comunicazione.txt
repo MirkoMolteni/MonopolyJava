@@ -1,7 +1,7 @@
 Standard per la comunicazione: csv
 Utilizziamo dei numeri per decidere cosa fare
 1 - Aggiungi player
-    Il client invia: 1;NOMEPLAYER
+    Il client invia: 1;NOMEPLAYER;IDPEDINA
     Il server risponde: 0;TESTOERRORE = errore
                         1;
 2 - Avvia partita
@@ -27,4 +27,5 @@ Utilizziamo dei numeri per decidere cosa fare
                         6;{INFOPLAYERAGGIORNATE}
 
 7 - Lista dei nomi dei player e la relativa pedina
+    Il client invia: 7;
     Il server risponde: 7;NOMEPLAYER1-IDPEDINA1,NOMEPLAYER2-IDPEDINA2...

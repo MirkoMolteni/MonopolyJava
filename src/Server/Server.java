@@ -75,6 +75,7 @@ public class Server {
                         break;
                 }
                 System.out.println("Message sent: " + risposta);
+                System.out.println("-------------------------");
                 // invio risposta
                 out.println(risposta);
             }
