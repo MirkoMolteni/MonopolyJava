@@ -8,12 +8,13 @@ import java.io.File;
 import java.io.IOException;
 
 public class lobby extends JFrame {
+    netUtil net = netUtil.getInstance();
 
     public lobby() {
         JFrame frame = new JFrame("Lobby - Monopoly");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280, 720);
-        frame.setMaximumSize(new Dimension(1280, 720));
+        frame.setSize(clientConfig.resWmenu, clientConfig.resHmenu);
+        frame.setMaximumSize(new Dimension(clientConfig.resWmenu, clientConfig.resHmenu));
         frame.setResizable(false);
 
         JPanel mainPanel = new JPanel();
@@ -45,23 +46,31 @@ public class lobby extends JFrame {
         JPanel playerPanel = new JPanel();
         playerPanel.setLayout(new GridLayout(0, 1));
 
-        // Parse player information received from the server
-        String data = "7;nome1-1,nome2-2,nome3-3"; // PLACEHOLDER PRE-SERVER
+        // Parse player information received from the serverù
+        net.send("7;");
+        String data = "";
+        try {
+            data = net.receive();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         data = data.substring(2);
         System.out.println(data);
         String[] players = data.split(",");
 
         for (String p : players) {
             String[] dati = p.split("-");
-            JPanel playerInfoPanel = new JPanel(new BorderLayout());
+            JPanel playerInfoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
             JLabel nome = new JLabel(dati[0]);
             nome.setFont(new Font("Arial", Font.PLAIN, 14));
             ImageIcon playerIcon = new ImageIcon("src/client/resources/pedine/" + dati[1] + ".png");
-            JLabel iconLabel = new JLabel(playerIcon);
+            Image playerImage = playerIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            ImageIcon scaledPlayerIcon = new ImageIcon(playerImage);
+            JLabel iconLabel = new JLabel(scaledPlayerIcon);
 
-            playerInfoPanel.add(nome, BorderLayout.NORTH);
-            playerInfoPanel.add(iconLabel, BorderLayout.CENTER);
+            playerInfoPanel.add(nome);
+            playerInfoPanel.add(iconLabel);
 
             playerPanel.add(playerInfoPanel);
         }

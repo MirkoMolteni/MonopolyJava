@@ -11,6 +11,7 @@ public class netUtil {
     private Socket socket;
     private BufferedReader in;
     private PrintWriter out;
+    private String latestError;
 
     private netUtil() {}
 
@@ -30,6 +31,7 @@ public class netUtil {
             out = new PrintWriter(socket.getOutputStream(), true);
         } catch (IOException e) {
             System.out.println("Errore nella connessione al server: " + e.getMessage());
+            latestError = e.getMessage();
         }
     }
 
@@ -45,10 +47,22 @@ public class netUtil {
 
     public String receive() throws IOException {
         if(in == null) {
-            System.out.println("Errore: connessione non stabilita!");
             return "";
         }else
             return in.readLine();
+    }
+
+    // ottengo lo status della connessione
+    public boolean getStatus() {
+        if(this.socket != null)
+            return true;
+        else
+            return false;
+    }
+
+    // ottengo l'ultimo messaggio di errore
+    public String getLastError() {
+        return latestError;
     }
 
     // chiudo la connessione
