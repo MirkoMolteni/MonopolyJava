@@ -20,7 +20,7 @@ Utilizziamo dei numeri per decidere cosa fare
 5 - Termina turno
     Il client invia: 5;
     Il server risponde: 0;TESTOERRORE = errore
-                        5;
+                        5;IDPLAYERSUCCESSIVO
 6 - Ipoteca casella
     Il client invia: 6;IDCASELLA
     Il server risponde: 0;TESTOERRORE = errore
