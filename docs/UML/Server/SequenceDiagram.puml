@@ -1,0 +1,27 @@
+@startuml
+title Monopoly - Sequence Diagram
+
+actor Giocatore
+participant Client
+participant Server
+
+Giocatore -> Client: Avvia gioco
+Client -> Server: Richiesta connessione
+Server -> Client: Conferma connessione
+Client -> Server: Richiesta partita
+Server -> Client: Invia dati partita
+Client -> Giocatore: Visualizza schermata di gioco
+
+loop Fase di gioco
+    Giocatore -> Client: Esegue azione di gioco
+    Client -> Server: Invia azione di gioco
+    Server -> Client: Invia aggiornamenti di gioco
+    Client -> Giocatore: Visualizza aggiornamenti di gioco
+end
+
+Giocatore -> Client: Termina gioco
+Client -> Server: Richiesta disconnessione
+Server -> Client: Conferma disconnessione
+Client -> Giocatore: Visualizza schermata di fine gioco
+
+@enduml

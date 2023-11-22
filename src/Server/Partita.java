@@ -271,7 +271,7 @@ public class Partita {
             x = turno + "";
         }
         currentPlayer = giocatori.get("P#" + x);
-        return "5;";
+        return "5;" + currentPlayer.getID();
     }
 
     /**
