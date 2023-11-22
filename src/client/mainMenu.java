@@ -8,15 +8,16 @@ import java.io.IOException;
 
 public class mainMenu extends JFrame {
     int pedinaIndex = 0;
-    public mainMenu(){
+
+    public mainMenu() {
         // ottengo l'istanza di netUtil - init
         netUtil net = netUtil.getInstance();
 
         // creazione frame
         JFrame frame = new JFrame("Monopoly");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1280, 720);
-        frame.setMaximumSize(new Dimension(1280, 720));
+        frame.setSize(clientConfig.resWmenu, clientConfig.resHmenu);
+        frame.setMaximumSize(new Dimension(clientConfig.resWmenu, clientConfig.resHmenu));
         frame.setResizable(false);
 
         // creazione pannello sfondo - immagine
@@ -39,17 +40,15 @@ public class mainMenu extends JFrame {
         JLabel labelUser = new JLabel("Nome:");
         JLabel labelPedina = new JLabel("Pedina:");
 
-
         // creazione textbox
         JTextField textBoxIP = new JTextField();
         JTextField textBoxPorta = new JTextField();
         JTextField textBoxNome = new JTextField();
 
-        // MARK: valori default - debug 
+        // MARK: valori default - debug
         textBoxIP.setText("127.0.0.1");
         textBoxPorta.setText("8080");
         textBoxNome.setText("test");
-
 
         // creazione bottone
         JButton buttonConnetti = new JButton("Entra nel server");
@@ -64,14 +63,13 @@ public class mainMenu extends JFrame {
         buttonCambia.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
         ImageIcon pedine[] = new ImageIcon[clientConfig.nPedine];
-        for(int i = 0; i < pedine.length; i++){
+        for (int i = 0; i < pedine.length; i++) {
             pedine[i] = new ImageIcon("src/client/resources/pedine/" + i + ".png");
             pedine[i].getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
         }
         ImageIcon tmp = new ImageIcon(pedine[0].getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         JLabel pedinaLabel = new JLabel(tmp);
         pedinaLabel.setBounds(0, 0, 50, 50);
-
 
         // creazione constraints
         GridBagConstraints constraints = new GridBagConstraints();
@@ -106,7 +104,7 @@ public class mainMenu extends JFrame {
         constraints.gridx = 0;
         constraints.gridy = 3;
         mainLabel.add(labelUser, constraints);
-        
+
         constraints.gridx = 1;
         constraints.gridy = 3;
         mainLabel.add(textBoxNome, constraints);
@@ -139,27 +137,36 @@ public class mainMenu extends JFrame {
                     e1.printStackTrace();
                 }
                 // creo il giocatore (stampo output) e rimando alla lobby
-                net.send("1;" + textBoxNome.getText());
+                net.send("1;" + textBoxNome.getText() + ";" + pedinaIndex);
                 try {
                     System.out.println(net.receive());
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-                // chiudo la finestra
-                frame.dispose();
-                // avvio la lobby
-                lobby lobby = new lobby();
+
+                if (net.getStatus()) {
+                    // chiudo la finestra
+                    frame.dispose();
+
+                    // avvio la lobby
+                    src.client.lobby.init();
+                } else {
+                    // mostro errore se non connesso
+                    String msg = "Errore di connessione: " + net.getLastError();
+                    JOptionPane.showMessageDialog(frame, msg, "Errore", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
         // listener per il cambio pedina
         buttonCambia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(pedinaIndex == 0){
+                if (pedinaIndex == 0) {
                     pedinaIndex = pedine.length - 1;
                 } else {
                     pedinaIndex--;
-                    ImageIcon tmp = new ImageIcon(pedine[pedinaIndex].getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+                    ImageIcon tmp = new ImageIcon(
+                            pedine[pedinaIndex].getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
                     pedinaLabel.setIcon(tmp);
                 }
             }
