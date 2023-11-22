@@ -296,6 +296,11 @@ public class Partita {
                 // se è una prigione, non ritira il bonus giro completo
                 if (typeCasella.equals("PG")) {
                     movePlayer(true, 10);
+                } else if (typeCasella.equals("V")) {
+                    // muovo il player al via
+                    movePlayer(true, 0);
+                    // gli do il bonus
+                    currentPlayer.setSoldi(currentPlayer.getSoldi() + 200);
                 } else {
 
                     // caso della casella successiva
@@ -447,6 +452,11 @@ public class Partita {
                 // se è una prigione, non ritira il bonus giro completo
                 if (typeCasella.equals("PG")) {
                     movePlayer(true, 10);
+                } else if (typeCasella.equals("V")) {
+                    // muovo il player al via
+                    movePlayer(true, 0);
+                    // gli do il bonus
+                    currentPlayer.setSoldi(currentPlayer.getSoldi() + 200);
                 } else {
 
                     // caso della casella successiva
@@ -628,12 +638,13 @@ public class Partita {
     /**
      * Metodo che controlla la posizione del giocatore per determinare se deve fare
      * qualcosa.
-     * Se la casella in cui si trova il giocatore ha un proprietario, il giocatore
-     * paga il pedaggio.
      */
     private void checkPosizione() {
-        // metodo che controlla la posizione del player per capire se deve fare qualcosa
-
+        // controllo se il player ha fatto un giro completo
+        if (currentPlayer.getPosizione() > 39) {
+            currentPlayer.setPosizione(currentPlayer.getPosizione() - 40);
+            currentPlayer.setSoldi(currentPlayer.getSoldi() + 200);
+        }
         // controllo se la casella ha già un proprietario
         if (t.getCasellaByPos(currentPlayer.getPosizione()).getPropietario() != "") {
             // se ha un proprietario, paga il pedaggio

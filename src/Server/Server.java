@@ -47,7 +47,7 @@ public class Server {
                 switch (campi[0]) {
                     case "1":
                         // aggiungo un giocatore alla partita
-                        risposta = p.addGiocatore(new Player(campi[1]));
+                        risposta = p.addGiocatore(new Player(campi[1], Integer.parseInt(campi[2])));
                         break;
                     case "2":
                         // inizio partita
