@@ -139,16 +139,18 @@ public class mainMenu extends JFrame {
                     e1.printStackTrace();
                 }
                 // creo il giocatore (stampo output) e rimando alla lobby
-                net.send("1;" + textBoxNome.getText());
+                net.send("1;" + textBoxNome.getText() + ";" + pedinaIndex);
                 try {
                     System.out.println(net.receive());
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
+                
                 // chiudo la finestra
                 frame.dispose();
+
                 // avvio la lobby
-                lobby lobby = new lobby();
+                src.client.lobby.init();
             }
         });
 
