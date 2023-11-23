@@ -2,6 +2,7 @@ package src.Server;
 
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
 
 public class ClientHandler extends Thread {
     private Socket clientSocket;
@@ -12,8 +13,9 @@ public class ClientHandler extends Thread {
 
     public ClientHandler(Socket socket, Partita p, Server s) throws IOException {
         this.clientSocket = socket;
-        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        out = new PrintWriter(clientSocket.getOutputStream(), true);
+        // in = new BufferedReader(new
+        // InputStreamReader(clientSocket.getInputStream()));
+        // out = new PrintWriter(clientSocket.getOutputStream(), true);
         this.p = p;
         this.s = s;
     }
@@ -22,41 +24,45 @@ public class ClientHandler extends Thread {
         // TODO: gestire il connection reset
         try {
             String inputLine;
+            // Scanner sc = new Scanner(System.in);
+
+            // while ((inputLine = sc.nextLine()) != null) {
             while ((inputLine = in.readLine()) != null) {
                 System.out.println("Message received: " + inputLine);
                 String campi[] = inputLine.split(";");
                 String risposta = "";
                 switch (campi[0]) {
-                    case "1":
+                    case "ADD":
                         // aggiungo un giocatore alla partita
                         risposta = p.addGiocatore(new Player(campi[1], Integer.parseInt(campi[2])));
                         break;
-                    case "2":
+                    case "START":
                         // inizio partita
                         risposta = p.startGame();
                         break;
-                    case "3":
+                    case "ROLL":
                         // lancio i dadi
                         risposta = p.rollDiceAndMove();
                         break;
-                    case "4":
+                    case "BUY":
                         // acquista casella
                         risposta = p.buyCasella();
                         break;
-                    case "5":
+                    case "CH":
                         // termina il turno
                         risposta = p.changeTurn();
                         break;
-                    case "6":
+                    case "IP":
                         // ipoteca una casella
                         risposta = p.ipotecaCasella(campi[1]);
                         break;
-                    case "7":
+                    case "LST":
                         // lista dei giocatori
                         risposta = p.getListaGiocatori();
                         break;
                 }
                 s.notifyAllClients(risposta);
+                // sendMessage(risposta);
 
             }
             try {
@@ -69,16 +75,18 @@ public class ClientHandler extends Thread {
                 e.printStackTrace();
 
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void sendMessage(String message) {
-        System.out.println(
-                "Message sent to " + clientSocket.getInetAddress() + ":" + clientSocket.getPort() + " : " + message);
+        // System.out.println(
+        // "Message sent to " + clientSocket.getInetAddress() + ":" +
+        // clientSocket.getPort() + " : " + message);
+        System.out.println("Message sent : " + message);
         System.out.println("-------------------------");
         // invio risposta
-        out.println(message);
+        // out.println(message);
     }
 }
