@@ -39,7 +39,7 @@ public class Partita {
         String id = g.getID();
         giocatori.put(id, g);
         currentPlayer = giocatori.get("P#1");
-        return "1;";
+        return "ADD;";
     }
 
     /**
@@ -49,7 +49,7 @@ public class Partita {
      */
     public String startGame() {
         Settings.GAME_STATUS = 0;
-        String s = "2";
+        String s = "START";
 
         for (Entry<String, Player> entry : giocatori.entrySet()) {
             // String key = entry.getKey();
@@ -78,20 +78,20 @@ public class Partita {
                 currentPlayer.removeUscitaPrigione();
                 // lo sposto in base al tiro dei dadi
                 movePlayer(false, dice2Roll + dice1Roll);
-                return "3-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
+                return "ROLL-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
                         + ";Sei uscito di prigione tramite una carta uscita prigione";
             } else {
                 // se non ha una carta, controllo se ha fatto un doppio
                 if (dice1Roll == dice2Roll) {
                     // se ha fatto un doppio lo sposto in base al tiro dei dadi
                     movePlayer(false, dice2Roll + dice1Roll);
-                    return "3-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
+                    return "ROLL-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
                             + ";Sei uscito di prigione tramite un doppio";
                 } else {
                     // se non ha fatto un doppio e non ha ancora fatto 3 turni in prigione, aumento
                     if (currentPlayer.getTurniPrigione() < 3) {
                         currentPlayer.addTurnoPrigione();
-                        return "3-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
+                        return "ROLL-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
                                 + ";Non sei riuscito a uscire di prigione";
                     } else {
                         currentPlayer.resetTurniPrigione();
@@ -110,7 +110,7 @@ public class Partita {
                 case "V":
                     // gli do 200€ per il giro completo
                     currentPlayer.setSoldi(currentPlayer.getSoldi() + 200);
-                    s = "3-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
+                    s = "ROLL-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
                             + ";Giro completato, prelievi 200€";
                     break;
                 case "PR":
@@ -122,7 +122,7 @@ public class Partita {
                     }
                     // eseguo la carta
                     String x = eseguiProbabilita(p);
-                    s = "3-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString() + ";" + p.getNome()
+                    s = "ROLL-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString() + ";" + p.getNome()
                             + "\r\n" + x;
                     // la elimino dal mazzo
                     prob.remove(p);
@@ -136,7 +136,7 @@ public class Partita {
                     }
                     // eseguo la carta
                     x = eseguiImprevisto(i);
-                    s = "3-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString() + ";" + i.getNome()
+                    s = "ROLL-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString() + ";" + i.getNome()
                             + "\r\n" + x;
                     // la elimino dal mazzo
                     imprev.remove(i);
@@ -145,24 +145,25 @@ public class Partita {
                     // tolgo i soldi al player
                     currentPlayer.setSoldi(currentPlayer.getSoldi()
                             + t.getCasellaByPos(currentPlayer.getPosizione()).getPrezzo());
-                    s = "3-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString() + ";Hai pagato "
+                    s = "ROLL-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString() + ";Hai pagato "
                             + Math.abs(t.getCasellaByPos(currentPlayer.getPosizione()).getPrezzo()) + "€ di "
                             + t.getCasellaByPos(currentPlayer.getPosizione()).getNome();
                     break;
                 case "GPG":
                     // sposto il player in prigione
                     movePlayer(true, 10);
-                    s = "3-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
+                    s = "ROLL-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
                             + ";Sei finito in prigione";
                     break;
                 default:
-                    s = "3-0;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString();
+                    s = "ROLL-0;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString();
                     break;
             }
         } else {
-            s = "3-0;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString();
+            s = "ROLL-0;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString();
         }
 
+        checkPosizione();
         return s;
     }
 
@@ -188,8 +189,6 @@ public class Partita {
         int pos = g.getPosizione();
         String s = "";
 
-        // TODO:controllare se la casella è ipotecata
-
         // controllo se il player è in transito sulla prigione
         if (pos == 10) {
             s = "0;Non puoi acquistare la prigione";
@@ -198,16 +197,27 @@ public class Partita {
 
         // controllare se la casella è acquistabile
         if (t.getCasellaByPos(pos).getPropietario() == "") {
+            int prezzo = 0;
+            boolean ipotecata = false;
+            if (t.getCasellaByPos(pos).isIpotecata()) {
+                prezzo = t.getCasellaByPos(pos).getValIpoteca();
+                ipotecata = true;
+            } else {
+                prezzo = t.getCasellaByPos(pos).getPrezzo();
+            }
             // controllare se il giocatore ha abbastanza soldi
             if (t.getCasellaByPos(pos).getPrezzo() <= g.getSoldi()) {
                 // sottraggo i soldi al giocatore
-                g.setSoldi(g.getSoldi() - t.getCasellaByPos(pos).getPrezzo());
+                g.setSoldi(g.getSoldi() - prezzo);
                 // aggiungo la casella alla lista delle proprieta del giocatore
                 g.addProprieta(t.getCasellaByPos(pos).getID());
                 // imposto il proprietario della casella
                 t.getCasellaByPos(pos).setPropietario(g.getID());
+                if (ipotecata) {
+                    t.getCasellaByPos(pos).setIpotecata(false);
+                }
                 // rispondo al client
-                s = "4;" + currentPlayer.toString();
+                s = "BUY;" + currentPlayer.toString();
             } else {
                 s = "0;Soldi insufficienti";
             }
@@ -245,7 +255,7 @@ public class Partita {
                 // aggiungo i soldi al giocatore
                 currentPlayer.setSoldi(currentPlayer.getSoldi() + t.getCassellaByID(id).getValIpoteca());
                 // rispondo al client
-                s = "6;" + currentPlayer.toString();
+                s = "IP;" + currentPlayer.toString();
             } else {
                 s = "0;Casella già ipotecata";
             }
@@ -271,9 +281,10 @@ public class Partita {
             x = turno + "";
         }
         currentPlayer = giocatori.get("P#" + x);
-        return "5;" + currentPlayer.getID();
+        return "CH;" + currentPlayer.getID();
     }
 
+    // TOOD: controllare carte tp
     /**
      * Esegue l'Imprevisto dato e restituisce un messaggio String.
      * 
@@ -606,7 +617,7 @@ public class Partita {
      *         della pedina
      */
     public String getListaGiocatori() {
-        String s = "7;";
+        String s = "LST;";
 
         for (Entry<String, Player> entry : giocatori.entrySet()) {
             Player value = entry.getValue();
@@ -650,6 +661,21 @@ public class Partita {
             // se ha un proprietario, paga il pedaggio
             currentPlayer.setSoldi(currentPlayer.getSoldi()
                     - t.getCasellaByPos(currentPlayer.getPosizione()).getPedaggio());
+
+            // controllo se il player ha abbastanza soldi
+            if (currentPlayer.getSoldi() < 0) {
+                // se non ha abbastanza soldi, lo elimino dalla partita
+                giocatori.remove(currentPlayer.getID());
+                // controllo se è l'ultimo player rimasto
+                if (giocatori.size() == 1) {
+                    // se è l'ultimo player rimasto, termino la partita
+                    Settings.GAME_STATUS = 1;
+                }
+            } else {
+                // pago il proprietario della casella
+                Player g = giocatori.get(t.getCasellaByPos(currentPlayer.getPosizione()).getPropietario());
+                g.setSoldi(g.getSoldi() + t.getCasellaByPos(currentPlayer.getPosizione()).getPedaggio());
+            }
         }
     }
 

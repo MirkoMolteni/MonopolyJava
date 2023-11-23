@@ -38,6 +38,7 @@ public class Server {
             System.out.println("Connessione stabilita con " +
                     clientSocket.getInetAddress());
             ClientHandler client = new ClientHandler(clientSocket, p, this);
+            // ClientHandler client = new ClientHandler(null, p, this);
             clients.add(client);
             client.start();
         }
