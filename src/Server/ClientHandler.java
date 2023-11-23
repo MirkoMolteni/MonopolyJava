@@ -13,9 +13,8 @@ public class ClientHandler extends Thread {
 
     public ClientHandler(Socket socket, Partita p, Server s) throws IOException {
         this.clientSocket = socket;
-        // in = new BufferedReader(new
-        // InputStreamReader(clientSocket.getInputStream()));
-        // out = new PrintWriter(clientSocket.getOutputStream(), true);
+        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        out = new PrintWriter(clientSocket.getOutputStream(), true);
         this.p = p;
         this.s = s;
     }
@@ -59,6 +58,9 @@ public class ClientHandler extends Thread {
                     case "LST":
                         // lista dei giocatori
                         risposta = p.getListaGiocatori();
+                        break;
+                    default:
+                        risposta = "Comando non riconosciuto";
                         break;
                 }
                 s.notifyAllClients(risposta);

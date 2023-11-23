@@ -46,7 +46,7 @@ public class lobby extends JFrame {
         mainLabel.add(logoLabel, constraints);
 
         // parse delle informazioni ricevute dal server sui player
-        net.send("7;");
+        net.send("LST;");
         String data = "";
         try {
             data = net.receive();
@@ -98,7 +98,7 @@ public class lobby extends JFrame {
 
         constraints.gridx = 1;
         constraints.gridy = constraintsCounter + 1;
-        constraints.gridwidth = 1; 
+        constraints.gridwidth = 1;
         mainLabel.add(buttonAvvia, constraints);
 
         // aggiungi i listener ai bottoni
