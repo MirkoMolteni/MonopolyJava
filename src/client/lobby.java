@@ -1,52 +1,39 @@
 package src.client;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class lobby extends JFrame {
-    netUtil net = netUtil.getInstance();
+        // ottengo l'istanza di netUtil - init
+        netUtil net = netUtil.getInstance();
+        
+        // variabile di appoggio per i player totali 
+        int totalPlayers = 0;
 
     public lobby() {
-        JFrame frame = new JFrame("Lobby - Monopoly");
+        // creazione frame
+        JFrame frame = new JFrame("Monopoly - Lobby");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(clientConfig.resWmenu, clientConfig.resHmenu);
         frame.setMaximumSize(new Dimension(clientConfig.resWmenu, clientConfig.resHmenu));
         frame.setResizable(false);
 
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
+        // creazione pannello sfondo - immagine
+        ImageIcon backgroundImage = new ImageIcon("src/client/resources/bg.png");
+        JLabel mainLabel = new JLabel(backgroundImage);
+        mainLabel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
 
-        BufferedImage backgroundImage;
-        try {
-            backgroundImage = ImageIO.read(new File("src/client/resources/bg.png"));
-            JLabel backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
-            frame.setContentPane(backgroundLabel);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } 
+        // creazione immagine logo
+        ImageIcon logoImage = new ImageIcon("src/client/resources/logo.png");
+        JLabel logoLabel = new JLabel(logoImage);
+        logoLabel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
 
-        JPanel titlePanel = new JPanel();
-        titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        // creazione layoutmanager
+        GridBagLayout layout = new GridBagLayout();
+        mainLabel.setLayout(layout);
 
-        JLabel titleLabel = new JLabel("Monopoly - Lobby pre-partita");
-        titleLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-        titlePanel.add(titleLabel);
-
-        JPanel subtitlePanel = new JPanel();
-        subtitlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-
-        JLabel subtitleLabel = new JLabel("Connected Players:");
-        subtitleLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-        subtitlePanel.add(subtitleLabel);
-
-        JPanel playerPanel = new JPanel();
-        playerPanel.setLayout(new GridLayout(0, 1));
-
-        // Parse player information received from the serverù
+        // parse delle informazioni sui player
         net.send("7;");
         String data = "";
         try {
@@ -59,6 +46,7 @@ public class lobby extends JFrame {
         String[] players = data.split(",");
 
         for (String p : players) {
+            totalPlayers++;
             String[] dati = p.split("-");
             JPanel playerInfoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
@@ -72,28 +60,22 @@ public class lobby extends JFrame {
             playerInfoPanel.add(nome);
             playerInfoPanel.add(iconLabel);
 
-            playerPanel.add(playerInfoPanel);
+            //playerPanel.add(playerInfoPanel);
         }
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        // creazione bottoni 
+        JButton buttonConnetti = new JButton("Aggiorna lista giocatori");
+        buttonConnetti.setBackground(new Color(176, 0, 20)); 
+        buttonConnetti.setForeground(Color.WHITE);
+        buttonConnetti.setFont(new Font("Tahoma", Font.BOLD, 20));
 
-        JButton reloadButton = new JButton("Aggiorna lista giocatori");
-        JButton startGameButton = new JButton("Avvia partita");
+        JButton buttonCambia = new JButton("Avvia partita!");
+        buttonCambia.setBackground(new Color(225, 0, 25));
+        buttonCambia.setForeground(Color.WHITE);
+        buttonCambia.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        frame.add(mainLabel);
 
-        buttonPanel.add(reloadButton);
-        buttonPanel.add(startGameButton);
-
-        mainPanel.add(titlePanel, BorderLayout.NORTH);
-        mainPanel.add(subtitlePanel, BorderLayout.CENTER);
-        mainPanel.add(playerPanel, BorderLayout.WEST);
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
-
-        frame.setContentPane(mainPanel);
+        // visualizza finestra
         frame.setVisible(true);
-    }
-
-    public static void init() {
-        SwingUtilities.invokeLater(() -> new lobby());
     }
 }

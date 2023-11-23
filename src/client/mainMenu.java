@@ -147,9 +147,8 @@ public class mainMenu extends JFrame {
                 if (net.getStatus()) {
                     // chiudo la finestra
                     frame.dispose();
-
                     // avvio la lobby
-                    src.client.lobby.init();
+                    lobby l = new lobby();
                 } else {
                     // mostro errore se non connesso
                     String msg = "Errore di connessione: " + net.getLastError();
