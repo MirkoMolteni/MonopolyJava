@@ -19,6 +19,7 @@ public class ClientHandler extends Thread {
     }
 
     public void run() {
+        // TODO: gestire il connection reset
         try {
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
@@ -58,18 +59,18 @@ public class ClientHandler extends Thread {
                 s.notifyAllClients(risposta);
 
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            in.close();
-            out.close();
-            clientSocket.close();
-            System.out.println("Connessione con " + clientSocket.getInetAddress() +
-                    "terminata.");
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                in.close();
+                out.close();
+                clientSocket.close();
+                System.out.println("Connessione con " + clientSocket.getInetAddress() +
+                        "terminata.");
+            } catch (IOException e) {
+                e.printStackTrace();
 
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

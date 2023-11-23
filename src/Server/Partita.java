@@ -188,8 +188,6 @@ public class Partita {
         int pos = g.getPosizione();
         String s = "";
 
-        // TODO:controllare se la casella è ipotecata
-
         // controllo se il player è in transito sulla prigione
         if (pos == 10) {
             s = "0;Non puoi acquistare la prigione";
@@ -198,14 +196,25 @@ public class Partita {
 
         // controllare se la casella è acquistabile
         if (t.getCasellaByPos(pos).getPropietario() == "") {
+            int prezzo = 0;
+            boolean ipotecata = false;
+            if (t.getCasellaByPos(pos).isIpotecata()) {
+                prezzo = t.getCasellaByPos(pos).getValIpoteca();
+                ipotecata = true;
+            } else {
+                prezzo = t.getCasellaByPos(pos).getPrezzo();
+            }
             // controllare se il giocatore ha abbastanza soldi
             if (t.getCasellaByPos(pos).getPrezzo() <= g.getSoldi()) {
                 // sottraggo i soldi al giocatore
-                g.setSoldi(g.getSoldi() - t.getCasellaByPos(pos).getPrezzo());
+                g.setSoldi(g.getSoldi() - prezzo);
                 // aggiungo la casella alla lista delle proprieta del giocatore
                 g.addProprieta(t.getCasellaByPos(pos).getID());
                 // imposto il proprietario della casella
                 t.getCasellaByPos(pos).setPropietario(g.getID());
+                if (ipotecata) {
+                    t.getCasellaByPos(pos).setIpotecata(false);
+                }
                 // rispondo al client
                 s = "4;" + currentPlayer.toString();
             } else {
