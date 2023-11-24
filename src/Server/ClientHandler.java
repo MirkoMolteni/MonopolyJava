@@ -59,6 +59,10 @@ public class ClientHandler extends Thread {
                         // lista dei giocatori
                         risposta = p.getListaGiocatori();
                         break;
+                    case "INFC":
+                        // informazioni casella
+                        risposta = p.getInfoCasella(campi[1]);
+                        break;
                     default:
                         risposta = "Comando non riconosciuto";
                         break;
@@ -85,7 +89,6 @@ public class ClientHandler extends Thread {
     public void sendMessage(String message) {
         // invio risposta
         out.println(message);
-
         System.out.println(
                 "Message sent to " + clientSocket.getInetAddress() + ":" + clientSocket.getPort() + " : " + message);
         // System.out.println("Message sent : " + message);
