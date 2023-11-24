@@ -83,12 +83,12 @@ public class ClientHandler extends Thread {
     }
 
     public void sendMessage(String message) {
-        // System.out.println(
-        // "Message sent to " + clientSocket.getInetAddress() + ":" +
-        // clientSocket.getPort() + " : " + message);
-        System.out.println("Message sent : " + message);
-        System.out.println("-------------------------");
         // invio risposta
-        // out.println(message);
+        out.println(message);
+
+        System.out.println(
+                "Message sent to " + clientSocket.getInetAddress() + ":" + clientSocket.getPort() + " : " + message);
+        // System.out.println("Message sent : " + message);
+        System.out.println("-------------------------");
     }
 }

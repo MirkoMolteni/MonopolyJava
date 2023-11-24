@@ -36,7 +36,7 @@ public class Server {
         while (true) {
             Socket clientSocket = serverSocket.accept();
             System.out.println("Connessione stabilita con " +
-                    clientSocket.getInetAddress());
+                    clientSocket.getInetAddress() + ":" + clientSocket.getPort());
             ClientHandler client = new ClientHandler(clientSocket, p, this);
             // ClientHandler client = new ClientHandler(null, p, this);
             clients.add(client);
