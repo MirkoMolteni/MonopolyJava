@@ -13,9 +13,8 @@ public class ClientHandler extends Thread {
 
     public ClientHandler(Socket socket, Partita p, Server s) throws IOException {
         this.clientSocket = socket;
-        // in = new BufferedReader(new
-        // InputStreamReader(clientSocket.getInputStream()));
-        // out = new PrintWriter(clientSocket.getOutputStream(), true);
+        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        out = new PrintWriter(clientSocket.getOutputStream(), true);
         this.p = p;
         this.s = s;
     }
@@ -60,6 +59,9 @@ public class ClientHandler extends Thread {
                         // lista dei giocatori
                         risposta = p.getListaGiocatori();
                         break;
+                    default:
+                        risposta = "Comando non riconosciuto";
+                        break;
                 }
                 s.notifyAllClients(risposta);
                 // sendMessage(risposta);
@@ -81,12 +83,12 @@ public class ClientHandler extends Thread {
     }
 
     public void sendMessage(String message) {
-        // System.out.println(
-        // "Message sent to " + clientSocket.getInetAddress() + ":" +
-        // clientSocket.getPort() + " : " + message);
-        System.out.println("Message sent : " + message);
-        System.out.println("-------------------------");
         // invio risposta
-        // out.println(message);
+        out.println(message);
+
+        System.out.println(
+                "Message sent to " + clientSocket.getInetAddress() + ":" + clientSocket.getPort() + " : " + message);
+        // System.out.println("Message sent : " + message);
+        System.out.println("-------------------------");
     }
 }
