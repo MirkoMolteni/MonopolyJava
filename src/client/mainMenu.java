@@ -137,7 +137,7 @@ public class mainMenu extends JFrame {
                     e1.printStackTrace();
                 }
                 // creo il giocatore (stampo output) e rimando alla lobby
-                net.send("1;" + textBoxNome.getText() + ";" + pedinaIndex);
+                net.send("ADD;" + textBoxNome.getText() + ";" + pedinaIndex);
                 try {
                     System.out.println(net.receive());
                 } catch (IOException e1) {
