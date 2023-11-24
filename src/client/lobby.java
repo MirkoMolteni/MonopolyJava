@@ -106,7 +106,7 @@ public class lobby extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // so che è bruttino ma funziona e non saprei come ricreare quella grid orribile in alto
                 frame.dispose();
-                lobby ci = new lobby();
+                lobby l = new lobby();
             }
         });
 

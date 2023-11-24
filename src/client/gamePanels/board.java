@@ -13,13 +13,13 @@ import java.io.IOException;
 public class board extends JPanel {
     // variabili d'istanza
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private File board = new File("./resources/board.png");
+    private File board = new File("src/client/resources/board.png");
     private Image image;
 
     public board() {
         try {
             image = ImageIO.read(board);
-            image = image.getScaledInstance(screenSize.height, screenSize.height, Image.SCALE_SMOOTH);
+            image = image.getScaledInstance(screenSize.height - 50, screenSize.height - 50, Image.SCALE_SMOOTH);
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -29,6 +29,6 @@ public class board extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image, screenSize.height, screenSize.height, null);
+        g.drawImage(image, 0, 0, screenSize.height - 50, screenSize.height - 50, null);
     }   
 }
