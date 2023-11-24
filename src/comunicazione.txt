@@ -1,31 +1,35 @@
 Standard per la comunicazione: csv
-Utilizziamo dei numeri per decidere cosa fare
-1 - Aggiungi player
+
+Aggiungi player
     Il client invia: ADD;NOMEPLAYER;IDPEDINA
     Il server risponde: 0;TESTOERRORE = errore
                         ADD;
-2 - Avvia partita
+Avvia partita
     Il client invia: START;
     Il server risponde: 0;TESTOERRORE = errore
                     	START;{INFOPLAYER1},{INFOPLAYER2}
-3 - Lancia i dadi
+Lancia i dadi
     Il client invia: ROLL;
     Il server risponde: 0;TESTOERRORE = errore
                         ROLL-0;DADO1;DADO2;{INFOPLAYERAGGIORNATE}			(quando capita su una proprieta)
                         ROLL-1;DADO1;DADO2;{INFOPLAYERAGGIORNATE};TESTO	(quando capita sulle altre caselle)
-4 - Acquisto casella
+Acquisto casella
     Il client invia: BUY;
     Il server risponde: 0;TESTOERRORE = errore
                         BUY;{INFOPLAYERAGGIORNATE}
-5 - Termina turno
+Termina turno
     Il client invia: CH;
     Il server risponde: 0;TESTOERRORE = errore
                         CH;IDPLAYERSUCCESSIVO
-6 - Ipoteca casella
+Ipoteca casella
     Il client invia: IP;IDCASELLA
     Il server risponde: 0;TESTOERRORE = errore
                         IP;{INFOPLAYERAGGIORNATE}
 
-7 - Lista dei nomi dei player e la relativa pedina
+Lista dei nomi dei player e la relativa pedina
     Il client invia: LST;
     Il server risponde: LST;NOMEPLAYER1-IDPEDINA1,NOMEPLAYER2-IDPEDINA2...
+
+Informazione della casella
+    Il client invia: INFC;IDCASELLA
+    Il server risponde: INFC;{INFOCASELLA}

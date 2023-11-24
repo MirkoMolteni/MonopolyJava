@@ -6,13 +6,13 @@ package src.Server.Carte;
  * Estende la classe Carta.
  */
 public class Casella extends Carta {
-    int gruppo;
-    int rendita[];
-    int prezzoCasa;
-    int ipoteca;
-    boolean ipotecata;
-    int numCase;
-    boolean albergo;
+    private int gruppo;
+    private int rendita[];
+    private int prezzoCasa;
+    private int ipoteca;
+    private boolean ipotecata;
+    private int numCase;
+    private boolean albergo;
 
     /**
      * Crea un oggetto Casella con i parametri specificati.
@@ -64,6 +64,15 @@ public class Casella extends Carta {
     @Override
     public int getValIpoteca() {
         return ipoteca;
+    }
+
+    /**
+     * Ritorna il valore della casa.
+     *
+     * @return il valore della casa
+     */
+    public int getValCasa() {
+        return prezzoCasa;
     }
 
     /**

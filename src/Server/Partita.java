@@ -628,6 +628,27 @@ public class Partita {
     }
 
     /**
+     * Ritorna le informazioni di una casella specifica identificata dal suo ID.
+     * Le informazioni includono il nome, il prezzo, il pedaggio , il valore
+     * ipotecario ,
+     * e se la casella è ipotecata (ipotecata).
+     *
+     * @param id l'ID della casella
+     * @return una stringa contenente le informazioni della casella
+     */
+    public String getInfoCasella(String id) {
+        String s = "INFC;{";
+        Carta c = t.getCassellaByID(id);
+        s += c.getNome() + ";" + c.getPrezzo() + ";" + c.getPedaggio() + ";" + c.getValIpoteca() + ";"
+                + c.getPropietario();
+        if (c.getClass() == Casella.class) {
+            s += ";" + ((Casella) c).getValCasa();
+        }
+        s += "}";
+        return s;
+    }
+
+    /**
      * Muovi il giocatore alla posizione specificata.
      * 
      * @param goTo true se il giocatore deve andare direttamente alla posizione
