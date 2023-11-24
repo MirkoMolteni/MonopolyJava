@@ -53,7 +53,7 @@ public class lobby extends JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        data = data.substring(2);
+        data = data.substring(4);
         System.out.println(data);
         String[] players = data.split(",");
 
@@ -104,6 +104,7 @@ public class lobby extends JFrame {
         // aggiungi i listener ai bottoni
         buttonAggiorna.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // so che è bruttino ma funziona e non saprei come ricreare quella grid orribile in alto
                 frame.dispose();
                 lobby ci = new lobby();
             }
@@ -111,6 +112,16 @@ public class lobby extends JFrame {
 
         buttonAvvia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if (net.getStatus()) {
+                    // chiudo la finestra
+                    frame.dispose();
+                    // avvio la partita
+                    game g = new game();
+                } else {
+                    // mostro errore se non connesso
+                    String msg = "Errore di connessione: " + net.getLastError();
+                    JOptionPane.showMessageDialog(frame, msg, "Errore", JOptionPane.ERROR_MESSAGE);
+                }
 
             }
         });
