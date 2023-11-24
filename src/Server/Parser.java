@@ -35,7 +35,7 @@ public class Parser {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.parse("src/Data/carte.xml");
+        Document document = builder.parse("./Data/carte.xml");
         Element root = document.getDocumentElement();
         NodeList place = root.getElementsByTagName("Place");
         NodeList imprevisti = root.getElementsByTagName("Imprevisti");
