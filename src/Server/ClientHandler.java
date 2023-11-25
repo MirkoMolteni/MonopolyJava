@@ -41,7 +41,7 @@ public class ClientHandler extends Thread {
                         break;
                     case "ROLL":
                         // lancio i dadi
-                        risposta = p.rollDiceAndMove();
+                        risposta = p.movePlayer(Integer.parseInt(campi[1]), Integer.parseInt(campi[2]));
                         break;
                     case "BUY":
                         // acquista casella

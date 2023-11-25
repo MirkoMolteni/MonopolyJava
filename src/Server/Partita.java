@@ -64,10 +64,7 @@ public class Partita {
      * 
      * @return Il risultato del lancio dei dadi e lo spostamento del giocatore come
      */
-    public String rollDiceAndMove() {
-        // lancio i dadi
-        int dice1Roll = (int) (Math.random() * Settings.MAX_ROLL) + 1;
-        int dice2Roll = (int) (Math.random() * Settings.MAX_ROLL) + 1;
+    public String movePlayer(int dice1Roll, int dice2Roll) {
         // TODO: implementare la logica del doppio
 
         // controllo se il player è in prigione
