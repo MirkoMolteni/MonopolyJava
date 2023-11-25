@@ -3,10 +3,10 @@ package src.client.gamePanels;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
@@ -21,15 +21,11 @@ public class dice extends JPanel {
     private ImageIcon imgDado1, imgDado2;
     private int dadoSize = 40;
     private JLabel dado1Label, dado2Label;
-
-
-    private int regDie1, regDie2;
-
     private Image[] diceImages = new Image[7];
 
     public dice() {
         this.setLayout(new BorderLayout());
-        //this.setMaximumSize(new Dimension(4 * panelSize, panelSize));
+        this.setMaximumSize(new Dimension((3 * dadoSize), dadoSize));
         this.setBackground(Color.gray);
 
         Dimension panelSizeSquare = new Dimension(dadoSize, dadoSize);
@@ -71,9 +67,13 @@ public class dice extends JPanel {
         this.add(dado2, BorderLayout.CENTER);
     }
 
-    
+    public void paint(Graphics g) {
+        super.paint(g);
+    }
 
-    public void paint() {
+    public void setDadi(int dado1, int dado2) {
+        imgDado1.setImage(diceImages[dado1]);
+        imgDado2.setImage(diceImages[dado2]);
         repaint();
     }
 }
