@@ -1,7 +1,7 @@
 package src.Server;
 
 /**
- * La classe MainJ è il punto di ingresso dell'applicazione server di Monopoly.
+ * La classe MainJ e' il punto di ingresso dell'applicazione server di Monopoly.
  * Avvia il server sulla porta 8080 e gestisce eventuali eccezioni che si
  * verificano durante l'avvio.
  */

@@ -4,6 +4,11 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
+/**
+ * La classe ClientHandler rappresenta un thread che gestisce la comunicazione
+ * con un client.
+ * Riceve messaggi dal client, li elabora e invia indietro le risposte.
+ */
 public class ClientHandler extends Thread {
     private Socket clientSocket;
     private BufferedReader in;
@@ -11,6 +16,16 @@ public class ClientHandler extends Thread {
     private Partita p;
     private Server s;
 
+    /**
+     * Constructs a new ClientHandler object.
+     * Crea un nuovo oggetto ClientHandler.
+     * 
+     * @param socket il socket del client
+     * @param p      l'istanza del gioco Monopoly
+     * @param s      l'istanza del server del gioco Monopoly
+     * @throws IOException se si verifica un errore I/O durante la creazione degli
+     *                     streams
+     */
     public ClientHandler(Socket socket, Partita p, Server s) throws IOException {
         this.clientSocket = socket;
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -19,6 +34,14 @@ public class ClientHandler extends Thread {
         this.s = s;
     }
 
+    /**
+     * Metodo che viene eseguito quando il thread viene avviato.
+     * Questo metodo legge l'input dal client, lo elabora e invia una risposta al
+     * client.
+     * Il client handler gestisce vari comandi come aggiungere un giocatore,
+     * iniziare una partita, tirare i dadi, comprare una proprietà, ecc.
+     * Il metodo termina quando il client si disconnette o si verifica un'eccezione.
+     */
     public void run() {
         // TODO: gestire il connection reset
         try {
@@ -86,6 +109,11 @@ public class ClientHandler extends Thread {
         }
     }
 
+    /**
+     * Invia un messaggio al client.
+     * 
+     * @param message il messaggio da inviare
+     */
     public void sendMessage(String message) {
         // invio risposta
         out.println(message);
