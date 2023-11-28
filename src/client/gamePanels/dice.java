@@ -71,9 +71,15 @@ public class dice extends JPanel {
         super.paint(g);
     }
 
-    public void setDadi(int dado1, int dado2) {
+    private void setDadi(int dado1, int dado2) {
         imgDado1.setImage(diceImages[dado1]);
         imgDado2.setImage(diceImages[dado2]);
         repaint();
+    }
+
+    public void lancioDadi(){
+        int dado1 = (int)(Math.random() * 6) + 1;
+        int dado2 = (int)(Math.random() * 6) + 1;
+        setDadi(dado1, dado2);
     }
 }

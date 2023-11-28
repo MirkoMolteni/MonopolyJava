@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -16,9 +17,10 @@ public class buttons extends JPanel{
     protected JButton endTurn;
     protected JButton pauseButton;
 
-    public buttons() {
+    public buttons(dice dadi) {
         JPanel panel = new JPanel();
-
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setOpaque(false);
         purchaseButton = new JButton("Compra");
         ipotecaButton = new JButton("Ipoteca carta");
         improveButton = new JButton("Migliora");
@@ -27,10 +29,9 @@ public class buttons extends JPanel{
 
         panel.add(rollDice);
         panel.add(endTurn);
-        panel.add(purchaseButton, BorderLayout.CENTER);
+        panel.add(purchaseButton);
         panel.add(ipotecaButton);
         panel.add(improveButton);
-
         this.setMaximumSize(panel.getMaximumSize());
 
         this.add(panel);
@@ -53,7 +54,7 @@ public class buttons extends JPanel{
 
         rollDice.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                dadi.lancioDadi();
             }
         });
 
@@ -65,9 +66,10 @@ public class buttons extends JPanel{
         purchaseButton.setEnabled(false);
         endTurn.setEnabled(false);
         improveButton.setEnabled(false);
-        rollDice.setEnabled(false);
+        rollDice.setEnabled(true);
         ipotecaButton.setEnabled(false);
 
         this.setVisible(true);
     }
+
 }

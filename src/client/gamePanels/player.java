@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -25,8 +26,11 @@ public class player extends JPanel {
         panel = new JPanel();
         playerPanel = new JPanel();
         
-        playerPanel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        //playerPanel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         scrollPane = new JScrollPane(playerPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        
+        // Aggiungi un elemento al playerPanel
+        playerPanel.add(new JButton("utente"));
 
         panel.setPreferredSize(new Dimension(100, 300));
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
