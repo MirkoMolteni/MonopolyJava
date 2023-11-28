@@ -33,14 +33,16 @@ public class Server {
      */
     public void start() throws Exception {
         Partita p = new Partita();
-        while (clients.size() < Settings.MAX_PLAYERS) {
-            Socket clientSocket = serverSocket.accept();
-            System.out.println("Connessione stabilita con " +
-                    clientSocket.getInetAddress() + ":" + clientSocket.getPort());
-            ClientHandler client = new ClientHandler(clientSocket, p, this);
-            // ClientHandler client = new ClientHandler(null, p, this);
-            clients.add(client);
-            client.start();
+        while (true) {
+            if (clients.size() < Settings.MAX_PLAYERS) {
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("Connessione stabilita con " +
+                        clientSocket.getInetAddress() + ":" + clientSocket.getPort());
+                ClientHandler client = new ClientHandler(clientSocket, p, this);
+                // ClientHandler client = new ClientHandler(null, p, this);
+                clients.add(client);
+                client.start();
+            }
         }
     }
 

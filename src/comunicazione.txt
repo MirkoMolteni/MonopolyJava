@@ -9,10 +9,10 @@ Avvia partita
     Il server risponde: 0;TESTOERRORE = errore
                     	START;{INFOPLAYER1},{INFOPLAYER2}
 Lancia i dadi
-    Il client invia: ROLL;
+    Il client invia: ROLL;DADO1;DADO2
     Il server risponde: 0;TESTOERRORE = errore
-                        ROLL-0;DADO1;DADO2;{INFOPLAYERAGGIORNATE}			(quando capita su una proprieta)
-                        ROLL-1;DADO1;DADO2;{INFOPLAYERAGGIORNATE};TESTO	(quando capita sulle altre caselle)
+                        ROLL-0;{INFOPLAYERAGGIORNATE}			(quando capita su una proprieta)
+                        ROLL-1;{INFOPLAYERAGGIORNATE};TESTO	(quando capita sulle altre caselle)
 Acquisto casella
     Il client invia: BUY;
     Il server risponde: 0;TESTOERRORE = errore

@@ -12,7 +12,8 @@ import org.w3c.dom.NodeList;
 import src.Server.Carte.*;
 
 /**
- * La classe Parser è responsabile del parsing del file XML contenente i dati di
+ * La classe Parser e' responsabile del parsing del file XML contenente i dati
+ * di
  * gioco e del popolamento delle strutture dati necessarie.
  */
 public class Parser {
