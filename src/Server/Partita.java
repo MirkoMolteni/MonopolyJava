@@ -75,20 +75,20 @@ public class Partita {
                 currentPlayer.removeUscitaPrigione();
                 // lo sposto in base al tiro dei dadi
                 movePlayer(false, dice2Roll + dice1Roll);
-                return "ROLL-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
+                return "ROLL-1;" + currentPlayer.toString()
                         + ";Sei uscito di prigione tramite una carta uscita prigione";
             } else {
                 // se non ha una carta, controllo se ha fatto un doppio
                 if (dice1Roll == dice2Roll) {
                     // se ha fatto un doppio lo sposto in base al tiro dei dadi
                     movePlayer(false, dice2Roll + dice1Roll);
-                    return "ROLL-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
+                    return "ROLL-1;" + currentPlayer.toString()
                             + ";Sei uscito di prigione tramite un doppio";
                 } else {
                     // se non ha fatto un doppio e non ha ancora fatto 3 turni in prigione, aumento
                     if (currentPlayer.getTurniPrigione() < 3) {
                         currentPlayer.addTurnoPrigione();
-                        return "ROLL-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
+                        return "ROLL-1;" + currentPlayer.toString()
                                 + ";Non sei riuscito a uscire di prigione";
                     } else {
                         currentPlayer.resetTurniPrigione();
@@ -107,7 +107,7 @@ public class Partita {
                 case "V":
                     // gli do 200€ per il giro completo
                     currentPlayer.setSoldi(currentPlayer.getSoldi() + 200);
-                    s = "ROLL-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
+                    s = "ROLL-1;" + currentPlayer.toString()
                             + ";Giro completato, prelievi 200€";
                     break;
                 case "PR":
@@ -119,7 +119,7 @@ public class Partita {
                     }
                     // eseguo la carta
                     String x = eseguiProbabilita(p);
-                    s = "ROLL-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString() + ";" + p.getNome()
+                    s = "ROLL-1;" + currentPlayer.toString() + ";" + p.getNome()
                             + "\r\n" + x;
                     // la elimino dal mazzo
                     prob.remove(p);
@@ -133,7 +133,7 @@ public class Partita {
                     }
                     // eseguo la carta
                     x = eseguiImprevisto(i);
-                    s = "ROLL-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString() + ";" + i.getNome()
+                    s = "ROLL-1;" + currentPlayer.toString() + ";" + i.getNome()
                             + "\r\n" + x;
                     // la elimino dal mazzo
                     imprev.remove(i);
@@ -142,22 +142,22 @@ public class Partita {
                     // tolgo i soldi al player
                     currentPlayer.setSoldi(currentPlayer.getSoldi()
                             + t.getCasellaByPos(currentPlayer.getPosizione()).getPrezzo());
-                    s = "ROLL-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString() + ";Hai pagato "
+                    s = "ROLL-1;" + currentPlayer.toString() + ";Hai pagato "
                             + Math.abs(t.getCasellaByPos(currentPlayer.getPosizione()).getPrezzo()) + "€ di "
                             + t.getCasellaByPos(currentPlayer.getPosizione()).getNome();
                     break;
                 case "GPG":
                     // sposto il player in prigione
                     movePlayer(true, 10);
-                    s = "ROLL-1;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString()
+                    s = "ROLL-1;" + currentPlayer.toString()
                             + ";Sei finito in prigione";
                     break;
                 default:
-                    s = "ROLL-0;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString();
+                    s = "ROLL-0;" + currentPlayer.toString();
                     break;
             }
         } else {
-            s = "ROLL-0;" + dice1Roll + ";" + dice2Roll + ";" + currentPlayer.toString();
+            s = "ROLL-0;" + currentPlayer.toString();
         }
 
         checkPosizione();
