@@ -49,7 +49,7 @@ public class Partita {
      */
     public String startGame() {
         Settings.GAME_STATUS = 0;
-        String s = "START";
+        String s = "START;P#1";
 
         for (Entry<String, Player> entry : giocatori.entrySet()) {
             // String key = entry.getKey();

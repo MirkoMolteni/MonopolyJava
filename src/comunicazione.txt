@@ -7,7 +7,7 @@ Aggiungi player
 Avvia partita
     Il client invia: START;
     Il server risponde: 0;TESTOERRORE = errore
-                    	START;{INFOPLAYER1},{INFOPLAYER2}
+                    	START;IDPRIMOPLAYER;{INFOPLAYER1};{INFOPLAYER2}
 Lancia i dadi
     Il client invia: ROLL;DADO1;DADO2
     Il server risponde: 0;TESTOERRORE = errore
