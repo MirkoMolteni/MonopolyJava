@@ -265,10 +265,19 @@ public class Partita {
 
     /**
      * Cambia il turno e restituisce una rappresentazione stringa del nuovo turno.
+     * Controllo anche che il player non abbia finito i soldi
      * 
      * @return Una rappresentazione stringa del nuovo turno.
      */
     public String changeTurn() {
+        if (currentPlayer.getSoldi() < 0) {
+            giocatori.remove(currentPlayer.getID());
+            if (giocatori.size() == 1) {
+                // se è l'ultimo player rimasto, termino la partita
+                Settings.GAME_STATUS = 1;
+                return "END;" + currentPlayer.toString();
+            }
+        }
         turno++;
         String x;
         if (turno > Settings.PLAYER_COUNT) {

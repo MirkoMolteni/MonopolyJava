@@ -33,3 +33,7 @@ Lista dei nomi dei player e la relativa pedina
 Informazione della casella
     Il client invia: INFC;IDCASELLA
     Il server risponde: INFC;{INFOCASELLA}
+
+Fine del gioco
+    In risposta al change turno
+    Il server invia: END;{INFOPLAYER}

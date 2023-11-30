@@ -33,7 +33,7 @@ public class Server {
      */
     public void start() throws Exception {
         Partita p = new Partita();
-        while (true) {
+        while (true && Settings.GAME_STATUS != 1) {
             if (clients.size() < Settings.MAX_PLAYERS) {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Connessione stabilita con " +

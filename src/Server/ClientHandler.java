@@ -49,7 +49,7 @@ public class ClientHandler extends Thread {
             // Scanner sc = new Scanner(System.in);
 
             // while ((inputLine = sc.nextLine()) != null) {
-            while ((inputLine = in.readLine()) != null) {
+            while ((inputLine = in.readLine()) != null && Settings.GAME_STATUS != 1) {
                 System.out.println("Message received: " + inputLine);
                 String campi[] = inputLine.split(";");
                 String risposta = "";
