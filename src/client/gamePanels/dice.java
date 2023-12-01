@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
@@ -77,9 +78,11 @@ public class dice extends JPanel {
         repaint();
     }
 
-    public void lancioDadi(){
-        int dado1 = (int)(Math.random() * 6) + 1;
-        int dado2 = (int)(Math.random() * 6) + 1;
+    public String lancioDadi(){
+        Random r = new Random();
+        int dado1 = r.nextInt(6) + 1;
+        int dado2 = r.nextInt(6) + 1;
         setDadi(dado1, dado2);
+        return dado1 + ";" + dado2;
     }
 }

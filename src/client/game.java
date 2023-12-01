@@ -4,9 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.LayoutManager;
 import java.awt.Toolkit;
-
+import java.io.IOException;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -15,22 +14,38 @@ import javax.swing.JPanel;
 import src.client.gamePanels.board;
 import src.client.gamePanels.buttons;
 import src.client.gamePanels.dice;
-import src.client.gamePanels.player;
+import src.client.gamePanels.playerPanel;
 
 public class game extends JFrame {
+    // variabili d'istanza
+    netUtil net = netUtil.getInstance();
+    condivisa condivisa = src.client.condivisa.getInstance();
+    
     private board tabellone;
     private buttons bottoni;
     private dice dadi;
-    private player giocatore;
+    private playerPanel giocatore;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private int width = (int)screenSize.getWidth();
     private int height = (int)screenSize.getHeight();
     
     public game() {
+        // informo il server che voglio iniziare la partita e ottengo la risposta
+        net.send("START;");
+        String data = "";
+        try {
+            data = net.receive();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        // parse dei dati ricevuti dal server
+        condivisa.parsePlayers(data);
+
         // inizializzo gli elementi da mettere nel tabellone
         tabellone = new board();
         dadi = new dice();
-        giocatore = new player();
+        giocatore = new playerPanel();
 
         // creo il frame che conterrà tutti gli elementi del gioco
         JFrame frame = new JFrame("Monopoly - In partita");
@@ -79,6 +94,5 @@ public class game extends JFrame {
 
     public void paint(Graphics g) {
         super.paint(g);
-
     }
 }

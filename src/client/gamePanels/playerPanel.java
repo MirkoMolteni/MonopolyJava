@@ -9,13 +9,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-public class player extends JPanel {
+public class playerPanel extends JPanel {
     private JPanel panel;
     private JScrollPane scrollPane;
     private JPanel playerPanel;
     private JTextArea textArea;
 
-    public player() {
+    public playerPanel() {
         this.setOpaque(false);
         this.setPreferredSize(new Dimension(500, 310));
         this.setMaximumSize(new Dimension(500, 310));
