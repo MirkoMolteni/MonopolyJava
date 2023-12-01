@@ -8,7 +8,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import src.client.client;
 import src.client.condivisa;
 import src.client.netUtil;
 

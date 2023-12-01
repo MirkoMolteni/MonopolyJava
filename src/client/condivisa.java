@@ -39,4 +39,8 @@ public class condivisa {
             playerList.add(p);
         }
     }
+
+    public ArrayList<player> getPlayerList() {
+        return playerList;
+    }
 }
