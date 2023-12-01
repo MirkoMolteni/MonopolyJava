@@ -15,6 +15,7 @@ public class ClientHandler extends Thread {
     private PrintWriter out;
     private Partita p;
     private Server s;
+    private String idPlayer;
 
     /**
      * Constructs a new ClientHandler object.
@@ -57,6 +58,7 @@ public class ClientHandler extends Thread {
                     case "ADD":
                         // aggiungo un giocatore alla partita
                         risposta = p.addGiocatore(new Player(campi[1], Integer.parseInt(campi[2])));
+                        idPlayer = campi[1];
                         break;
                     case "START":
                         // inizio partita
@@ -107,6 +109,8 @@ public class ClientHandler extends Thread {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        p.removeGiocatore(idPlayer);
     }
 
     /**

@@ -700,6 +700,11 @@ public class Partita {
         }
     }
 
+    /**
+     * Ritorna una stringa contenente le informazioni di tutti i giocatori.
+     * 
+     * @return una rappresentazione stringa delle informazioni di tutti i giocatori
+     */
     private String getInfoAllPlayer() {
         String s = "";
         for (Entry<String, Player> entry : giocatori.entrySet()) {
@@ -710,4 +715,12 @@ public class Partita {
         return s.replace(";#", "");
     }
 
+    /**
+     * Rimuove un giocatore dalla partita.
+     * 
+     * @param id l'ID del giocatore da rimuovere
+     */
+    public void removeGiocatore(String id) {
+        giocatori.remove(id);
+    }
 }
