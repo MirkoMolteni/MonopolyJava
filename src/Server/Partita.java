@@ -230,7 +230,6 @@ public class Partita {
      * Questo metodo consente al giocatore corrente di ipotecare una proprietà sulla
      * scacchiera di gioco.
      * 
-     * @param id L'ID della proprietà da ipotecare.
      * @return Una stringa che rappresenta la risposta all'azione di ipoteca.
      *         - Se la proprietà viene ipotecata con successo, la stringa inizierà
      *         con
@@ -241,7 +240,9 @@ public class Partita {
      *         - Se il giocatore non possiede la proprietà, la stringa inizierà con
      *         "0;Non possiedi questa casella".
      */
-    public String ipotecaCasella(String id) {
+    public String ipotecaCasella() {
+        Player g = currentPlayer;
+        String id = Integer.toString(g.getPosizione());
         String s = "";
 
         // controllo se il giocatore possiede la casella

@@ -46,35 +46,44 @@ public class buttons extends JPanel {
         rollDice.setEnabled(true);
         ipotecaButton.setEnabled(false);
 
-
         this.add(panel);
 
-        // buttonConnetti.addActionListener(new ActionListener() {
         purchaseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            //Acquisto casella
-            //Il client invia: BUY;
-            //Il server risponde: 0;TESTOERRORE = errore
-            //BUY;INFOTUTTIPLAYER
+                // Acquisto casella
+                net.send("BUY;");
+                String data = "";
+                try {
+                    data = net.receive();
+                } catch (IOException e2) {
+                    e2.printStackTrace();
+                }
+                String[] splittedData = data.split(";");
+
+                condivisa.parsePlayers(splittedData[1]);
+
+                // aggiorno il pannello dei player
+                playerPanel.updatePlayerPanel();
             }
         });
 
         ipotecaButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            net.send("IP;"); //current casella
-            String data = "";
-            try {
-                data = net.receive();
-            } catch (IOException e2) {
-                e2.printStackTrace();
-            }
-            String[] splittedData = data.split(";");
-            condivisa.parsePlayers(splittedData[1]);
+                net.send("IP;"); // current casella
+                String data = "";
+                try {
+                    data = net.receive();
+                } catch (IOException e2) {
+                    e2.printStackTrace();
+                }
+                String[] splittedData = data.split(";");
+                condivisa.parsePlayers(splittedData[1]);
             }
         });
 
         improveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // meccanica not yet implemented
             }
         });
 
@@ -91,13 +100,29 @@ public class buttons extends JPanel {
                 }
 
                 String[] splittedData = data.split(";");
-                if(data.charAt(5) == 0) {
-                    // proprietà
-                }else if (data.charAt(5) == 1) {
-                    String testo = splittedData[2];
+                if (data.charAt(5) == 0) {
+                    if (data.charAt(7) == 1) {
+                        // comprabile
+                        purchaseButton.setEnabled(true);
+                    } else if (data.charAt(7) == 2){
+                        // ipotecabile
+                        purchaseButton.setEnabled(false);
+                        ipotecaButton.setEnabled(true);
+                    } else if (data.charAt(7) == 3){
+                        // paga affitto
+                        purchaseButton.setEnabled(false);
+                        ipotecaButton.setEnabled(false);
+                    }
+                } else if (data.charAt(5) == 1) {
+                    String testo = splittedData[3];
+                    // altro tipo casella, da implementare
+                    System.out.println(testo);
                 }
 
                 condivisa.parsePlayers(splittedData[1]);
+
+                // aggiorno il pannello dei player
+                playerPanel.updatePlayerPanel();
             }
         });
 

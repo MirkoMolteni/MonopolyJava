@@ -78,7 +78,7 @@ public class ClientHandler extends Thread {
                         break;
                     case "IP":
                         // ipoteca una casella
-                        risposta = p.ipotecaCasella(campi[1]);
+                        risposta = p.ipotecaCasella();
                         break;
                     case "LST":
                         // lista dei giocatori
