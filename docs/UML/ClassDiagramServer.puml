@@ -1,0 +1,152 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class Carta {
+  + Carta(String, String, int): 
+  - ID: String
+  - prezzo: int
+  - nome: String
+  - propietario: String
+   prezzo: int
+   nome: String
+   pedaggio: int
+   propietario: String
+   valIpoteca: int
+   ID: String
+   ipotecata: boolean
+}
+class Casella {
+  + Casella(String, String, int, int, int[], int, int): 
+  - ipotecata: boolean
+   valIpoteca: int
+   valCasa: int
+   ipotecata: boolean
+   pedaggio: int
+}
+class ClientHandler {
+  + ClientHandler(Socket, Partita, Server): 
+  + run(): void
+  + sendMessage(String): void
+}
+class Imprevisto {
+  + Imprevisto(String, String, int, int, String): 
+  ~ value: String
+  ~ caso: int
+   caso: int
+   value: String
+}
+class MainJ {
+  + MainJ(): 
+  + main(String[]): void
+}
+class Parser {
+  + Parser(): 
+  + parseCarteXml(Carta[], ArrayList<Imprevisto>, ArrayList<Probabilita>): void
+}
+class Partita {
+  + Partita(): 
+  - eseguiImprevisto(Imprevisto): String
+  - checkPosizione(): void
+  + addGiocatore(Player): String
+  + movePlayer(int, int): String
+  + ipotecaCasella(String): String
+  - movePlayer(boolean, int): void
+  + buyCasella(): String
+  + removeGiocatore(String): void
+  + getInfoCasella(String): String
+  - eseguiProbabilita(Probabilita): String
+  + changeTurn(): String
+  + startGame(): String
+   infoAllPlayer: String
+   listaGiocatori: String
+}
+class Player {
+  + Player(String, int): 
+  - countCase: int
+  - inPrigione: boolean
+  - posizione: int
+  - ID: String
+  - soldi: int
+  - nome: String
+  - countAlberghi: int
+  - turniPrigione: int
+  + removeUscitaPrigione(): void
+  + hasProprieta(String): boolean
+  + addAlbergo(int): void
+  + addUscitaPrigione(String): void
+  + InPrigione(): boolean
+  + addCasa(int): void
+  + hasUscitaPrigione(): boolean
+  + resetTurniPrigione(): void
+  + toString(): String
+  + addProprieta(String): void
+  + addTurnoPrigione(): void
+   countAlberghi: int
+   nome: String
+   posizione: int
+   turniPrigione: int
+   IDPedina: int
+   countCase: int
+   inPrigione: boolean
+   ID: String
+   soldi: int
+}
+class Probabilita {
+  + Probabilita(String, String, int, int, String): 
+  - value: String
+  - caso: int
+   caso: int
+   value: String
+}
+class Railroad {
+  + Railroad(String, String, int, int[], int): 
+  ~ ipotecata: boolean
+   valIpoteca: int
+   ipotecata: boolean
+}
+class Server {
+  + Server(int): 
+  + start(): void
+  + notifyAllClients(String): void
+}
+class Societa {
+  + Societa(String, String, int, int[], int): 
+  ~ ipotecata: boolean
+   valIpoteca: int
+   ipotecata: boolean
+}
+class Tabellone {
+  + Tabellone(): 
+  + caselle: Carta[]
+  + getCasellaByPos(int): Carta
+  + getCassellaByID(String): Carta
+  + getTypeCasella(int): String
+   caselle: Carta[]
+}
+
+Casella        -[#000082,plain]-^  Carta         
+ClientHandler "1" *-[#595959,plain]-> "p\n1" Partita       
+ClientHandler  -[#595959,dashed]->  Player        : "«create»"
+ClientHandler "1" *-[#595959,plain]-> "s\n1" Server        
+Imprevisto     -[#000082,plain]-^  Carta         
+MainJ          -[#595959,dashed]->  Server        : "«create»"
+Parser         -[#595959,dashed]->  Carta         : "«create»"
+Parser         -[#595959,dashed]->  Casella       : "«create»"
+Parser         -[#595959,dashed]->  Imprevisto    : "«create»"
+Parser         -[#595959,dashed]->  Probabilita   : "«create»"
+Parser         -[#595959,dashed]->  Railroad      : "«create»"
+Parser         -[#595959,dashed]->  Societa       : "«create»"
+Partita       "1" *-[#595959,plain]-> "currentPlayer\n1" Player        
+Partita       "1" *-[#595959,plain]-> "t\n1" Tabellone     
+Partita        -[#595959,dashed]->  Tabellone     : "«create»"
+Probabilita    -[#000082,plain]-^  Carta         
+Railroad       -[#000082,plain]-^  Carta         
+Server         -[#595959,dashed]->  ClientHandler : "«create»"
+Server         -[#595959,dashed]->  Partita       : "«create»"
+Societa        -[#000082,plain]-^  Carta         
+Tabellone      -[#595959,dashed]->  Carta         : "«create»"
+Tabellone     "1" *-[#595959,plain]-> "caselle\n*" Carta         
+@enduml
