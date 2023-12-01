@@ -56,7 +56,7 @@ public class Player {
      */
     public String toString() {
         // ID:nome:soldi:posizione:[proprietà1,proprietà2]:[uscitePrigione]
-        String s = "" + ID + ":" + nome + ":" + soldi + ":" + posizione + ":[";
+        String s = ID + ":" + nome + ":" + soldi + ":" + posizione + ":[";
         for (String string : proprieta) {
             if (proprieta.indexOf(string) == 0) {
                 s += string;

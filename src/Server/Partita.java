@@ -49,7 +49,7 @@ public class Partita {
      */
     public String startGame() {
         Settings.GAME_STATUS = 0;
-        String s = "START;P#1;" + getInfoAllPlayer();
+        String s = "START;" + getInfoAllPlayer();
         return s;
     }
 
