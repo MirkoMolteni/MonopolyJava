@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import src.client.gamePanels.board;
 import src.client.gamePanels.buttons;
+import src.client.gamePanels.console;
 import src.client.gamePanels.dice;
 import src.client.gamePanels.playerPanel;
 
@@ -25,6 +26,7 @@ public class game extends JFrame {
     private buttons bottoni;
     private dice dadi;
     private playerPanel giocatore;
+    private console console;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private int width = (int)screenSize.getWidth();
     private int height = (int)screenSize.getHeight();
@@ -46,6 +48,7 @@ public class game extends JFrame {
         tabellone = new board();
         dadi = new dice();
         giocatore = new playerPanel();
+        console = new console();
 
         // creo il frame che conterrà tutti gli elementi del gioco
         JFrame frame = new JFrame("Monopoly - In partita");
@@ -79,8 +82,12 @@ public class game extends JFrame {
         JPanel rightPanel = new JPanel();
         rightPanel.setOpaque(false);
         rightPanel.setPreferredSize(new Dimension((width / 100) * 30, height));
+        rightPanel.add(Box.createVerticalGlue());
         rightPanel.add(giocatore);
-        centerPanel.add(Box.createVerticalGlue());
+        rightPanel.add(Box.createVerticalGlue());
+        rightPanel.add(console);
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+        rightPanel.add(Box.createVerticalGlue());
 
         frame.setLayout(new BorderLayout());
         frame.add(leftPanel, BorderLayout.WEST);

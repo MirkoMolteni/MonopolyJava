@@ -61,7 +61,6 @@ public class playerPanel extends JPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(Color.black);
         panel.add(scrollPane);
-        textArea = new JTextArea();
         textArea.setPreferredSize(new Dimension(380, 300));
         textArea.setEditable(false);
 

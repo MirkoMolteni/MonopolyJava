@@ -126,6 +126,17 @@ public class lobby extends JFrame {
             }
         });
 
+        // TODO: aggiungere impl. lato server
+        // tbd - attendo avvio partita da server
+        // try {
+        //     if(net.receive() == "START;") {
+        //         frame.dispose();
+        //         game g = new game();
+        //     }
+        // } catch (IOException e1) {
+        //     e1.printStackTrace();
+        // }
+
         // aggiungo il label principale alla finestra
         frame.add(mainLabel);
 

@@ -148,9 +148,12 @@ public class Partita {
                     break;
                 default:
                     if (t.getCasellaByPos(currentPlayer.getPosizione()).getPropietario() != "")
-                        s = "ROLL-0;0;" + getInfoAllPlayer();
+                        s = "ROLL-0;1;" + getInfoAllPlayer(); // acquistabile
+                    else if (t.getCasellaByPos(currentPlayer.getPosizione()).getPropietario()
+                            .equals(currentPlayer.getNome()))
+                        s = "ROLL-0;2;" + getInfoAllPlayer(); // ipotecabile
                     else
-                        s = "ROLL-0;1;" + getInfoAllPlayer();
+                        s = "ROLL-0;3;" + getInfoAllPlayer(); // paga affitto
                     break;
             }
         } else {

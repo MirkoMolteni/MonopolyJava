@@ -61,14 +61,17 @@ public class buttons extends JPanel {
                 String[] splittedData = data.split(";");
 
                 condivisa.parsePlayers(splittedData[1]);
+                purchaseButton.setEnabled(false);
 
                 // aggiorno il pannello dei player
                 playerPanel.updatePlayerPanel();
+                console.setText("Hai acquistato la casella!");
             }
         });
 
         ipotecaButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // TODO: ri-ottieni la proprietà
                 net.send("IP;"); // current casella
                 String data = "";
                 try {
@@ -78,6 +81,8 @@ public class buttons extends JPanel {
                 }
                 String[] splittedData = data.split(";");
                 condivisa.parsePlayers(splittedData[1]);
+                ipotecaButton.setEnabled(false);
+                console.setText("Hai ipotecato la casella!");
             }
         });
 
@@ -123,6 +128,8 @@ public class buttons extends JPanel {
 
                 // aggiorno il pannello dei player
                 playerPanel.updatePlayerPanel();
+                console.setText("Hai tirato " + result + "!");
+                endTurn.setEnabled(true);
             }
         });
 
@@ -136,7 +143,8 @@ public class buttons extends JPanel {
                     e2.printStackTrace();
                 }
                 String[] splittedData = data.split(";");
-                System.out.println("è il turno di " + splittedData[1]);
+                endTurn.setEnabled(false);
+                console.setText("E' il turno di " + splittedData[1] + "!");
             }
         });
 
