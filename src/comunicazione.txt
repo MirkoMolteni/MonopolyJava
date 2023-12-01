@@ -14,7 +14,7 @@ InfoPlayer = ID:nome:soldi:posizione:[proprietà1,proprietà2]:[uscitePrigione]
 Lancia i dadi
     Il client invia: ROLL;DADO1;DADO2
     Il server risponde: 0;TESTOERRORE = errore
-                        ROLL-0;INFOTUTTIPLAYER		(quando capita su una proprieta)
+                        ROLL-0;ACQUISTABILE;INFOTUTTIPLAYER		(quando capita su una proprieta)
                         ROLL-1;INFOTUTTIPLAYER;TESTO	    (quando capita sulle altre caselle)
 Acquisto casella
     Il client invia: BUY;

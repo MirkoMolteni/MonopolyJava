@@ -147,11 +147,18 @@ public class Partita {
                             + ";Sei finito in prigione";
                     break;
                 default:
-                    s = "ROLL-0;" + getInfoAllPlayer();
+                    if (t.getCasellaByPos(currentPlayer.getPosizione()).getPropietario() != "")
+                        s = "ROLL-0;0;" + getInfoAllPlayer();
+                    else
+                        s = "ROLL-0;1;" + getInfoAllPlayer();
                     break;
             }
         } else {
-            s = "ROLL-0;" + getInfoAllPlayer();
+            if (t.getCasellaByPos(currentPlayer.getPosizione()).getPropietario() != "")
+                s = "ROLL-0;0;" + getInfoAllPlayer();
+            else
+                s = "ROLL-0;1;" + getInfoAllPlayer();
+            // s = "ROLL-0;" + getInfoAllPlayer();
         }
 
         checkPosizione();
