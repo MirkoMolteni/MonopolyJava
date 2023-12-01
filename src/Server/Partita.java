@@ -49,13 +49,7 @@ public class Partita {
      */
     public String startGame() {
         Settings.GAME_STATUS = 0;
-        String s = "START;P#1";
-
-        for (Entry<String, Player> entry : giocatori.entrySet()) {
-            // String key = entry.getKey();
-            Player value = entry.getValue();
-            s += ";" + value.toString();
-        }
+        String s = "START;P#1;" + getInfoAllPlayer();
         return s;
     }
 
@@ -75,20 +69,20 @@ public class Partita {
                 currentPlayer.removeUscitaPrigione();
                 // lo sposto in base al tiro dei dadi
                 movePlayer(false, dice2Roll + dice1Roll);
-                return "ROLL-1;" + currentPlayer.toString()
+                return "ROLL-1;" + getInfoAllPlayer()
                         + ";Sei uscito di prigione tramite una carta uscita prigione";
             } else {
                 // se non ha una carta, controllo se ha fatto un doppio
                 if (dice1Roll == dice2Roll) {
                     // se ha fatto un doppio lo sposto in base al tiro dei dadi
                     movePlayer(false, dice2Roll + dice1Roll);
-                    return "ROLL-1;" + currentPlayer.toString()
+                    return "ROLL-1;" + getInfoAllPlayer()
                             + ";Sei uscito di prigione tramite un doppio";
                 } else {
                     // se non ha fatto un doppio e non ha ancora fatto 3 turni in prigione, aumento
                     if (currentPlayer.getTurniPrigione() < 3) {
                         currentPlayer.addTurnoPrigione();
-                        return "ROLL-1;" + currentPlayer.toString()
+                        return "ROLL-1;" + getInfoAllPlayer()
                                 + ";Non sei riuscito a uscire di prigione";
                     } else {
                         currentPlayer.resetTurniPrigione();
@@ -107,7 +101,7 @@ public class Partita {
                 case "V":
                     // gli do 200€ per il giro completo
                     currentPlayer.setSoldi(currentPlayer.getSoldi() + 200);
-                    s = "ROLL-1;" + currentPlayer.toString()
+                    s = "ROLL-1;" + getInfoAllPlayer()
                             + ";Giro completato, prelievi 200€";
                     break;
                 case "PR":
@@ -119,7 +113,7 @@ public class Partita {
                     }
                     // eseguo la carta
                     String x = eseguiProbabilita(p);
-                    s = "ROLL-1;" + currentPlayer.toString() + ";" + p.getNome()
+                    s = "ROLL-1;" + getInfoAllPlayer() + ";" + p.getNome()
                             + "\r\n" + x;
                     // la elimino dal mazzo
                     prob.remove(p);
@@ -133,7 +127,7 @@ public class Partita {
                     }
                     // eseguo la carta
                     x = eseguiImprevisto(i);
-                    s = "ROLL-1;" + currentPlayer.toString() + ";" + i.getNome()
+                    s = "ROLL-1;" + getInfoAllPlayer() + ";" + i.getNome()
                             + "\r\n" + x;
                     // la elimino dal mazzo
                     imprev.remove(i);
@@ -142,22 +136,22 @@ public class Partita {
                     // tolgo i soldi al player
                     currentPlayer.setSoldi(currentPlayer.getSoldi()
                             + t.getCasellaByPos(currentPlayer.getPosizione()).getPrezzo());
-                    s = "ROLL-1;" + currentPlayer.toString() + ";Hai pagato "
+                    s = "ROLL-1;" + getInfoAllPlayer() + ";Hai pagato "
                             + Math.abs(t.getCasellaByPos(currentPlayer.getPosizione()).getPrezzo()) + "€ di "
                             + t.getCasellaByPos(currentPlayer.getPosizione()).getNome();
                     break;
                 case "GPG":
                     // sposto il player in prigione
                     movePlayer(true, 10);
-                    s = "ROLL-1;" + currentPlayer.toString()
+                    s = "ROLL-1;" + getInfoAllPlayer()
                             + ";Sei finito in prigione";
                     break;
                 default:
-                    s = "ROLL-0;" + currentPlayer.toString();
+                    s = "ROLL-0;" + getInfoAllPlayer();
                     break;
             }
         } else {
-            s = "ROLL-0;" + currentPlayer.toString();
+            s = "ROLL-0;" + getInfoAllPlayer();
         }
 
         checkPosizione();
@@ -214,7 +208,7 @@ public class Partita {
                     t.getCasellaByPos(pos).setIpotecata(false);
                 }
                 // rispondo al client
-                s = "BUY;" + currentPlayer.toString();
+                s = "BUY;" + getInfoAllPlayer();
             } else {
                 s = "0;Soldi insufficienti";
             }
@@ -252,7 +246,7 @@ public class Partita {
                 // aggiungo i soldi al giocatore
                 currentPlayer.setSoldi(currentPlayer.getSoldi() + t.getCassellaByID(id).getValIpoteca());
                 // rispondo al client
-                s = "IP;" + currentPlayer.toString();
+                s = "IP;" + getInfoAllPlayer();
             } else {
                 s = "0;Casella già ipotecata";
             }
@@ -275,7 +269,7 @@ public class Partita {
             if (giocatori.size() == 1) {
                 // se è l'ultimo player rimasto, termino la partita
                 Settings.GAME_STATUS = 1;
-                return "END;" + currentPlayer.toString();
+                return "END;" + currentPlayer.getID();
             }
         }
         turno++;
@@ -643,14 +637,14 @@ public class Partita {
      * @return una stringa contenente le informazioni della casella
      */
     public String getInfoCasella(String id) {
-        String s = "INFC;{";
+        // nome:prezzo:pedaggio:valIpoteca:proprietario:valCasa
+        String s = "INFC;";
         Carta c = t.getCassellaByID(id);
-        s += c.getNome() + ";" + c.getPrezzo() + ";" + c.getPedaggio() + ";" + c.getValIpoteca() + ";"
+        s += c.getNome() + ":" + c.getPrezzo() + ":" + c.getPedaggio() + ":" + c.getValIpoteca() + ":"
                 + c.getPropietario();
         if (c.getClass() == Casella.class) {
-            s += ";" + ((Casella) c).getValCasa();
+            s += ":" + ((Casella) c).getValCasa();
         }
-        s += "}";
         return s;
     }
 
@@ -704,6 +698,16 @@ public class Partita {
                 g.setSoldi(g.getSoldi() + t.getCasellaByPos(currentPlayer.getPosizione()).getPedaggio());
             }
         }
+    }
+
+    private String getInfoAllPlayer() {
+        String s = "";
+        for (Entry<String, Player> entry : giocatori.entrySet()) {
+            Player value = entry.getValue();
+            s += value.toString() + ";";
+        }
+        s += "#";
+        return s.replace(";#", "");
     }
 
 }

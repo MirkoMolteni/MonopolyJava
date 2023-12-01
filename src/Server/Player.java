@@ -55,8 +55,8 @@ public class Player {
      * @return una rappresentazione in stringa dell'oggetto Player
      */
     public String toString() {
-        // {ID:nome:soldi:posizione:[proprietà]:[uscitePrigione]}
-        String s = "{" + ID + ":" + nome + ":" + soldi + ":" + posizione + ":[";
+        // ID:nome:soldi:posizione:[proprietà1,proprietà2]:[uscitePrigione]
+        String s = "" + ID + ":" + nome + ":" + soldi + ":" + posizione + ":[";
         for (String string : proprieta) {
             if (proprieta.indexOf(string) == 0) {
                 s += string;
@@ -73,7 +73,7 @@ public class Player {
                 s += "," + uscitePrigione[i];
             }
         }
-        s += "]}";
+        s += "]";
         return s;
     }
 

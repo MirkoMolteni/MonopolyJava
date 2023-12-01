@@ -7,16 +7,19 @@ Aggiungi player
 Avvia partita
     Il client invia: START;
     Il server risponde: 0;TESTOERRORE = errore
-                    	START;IDPRIMOPLAYER;{INFOPLAYER1};{INFOPLAYER2}
+                    	START;IDPRIMOPLAYER;INFOTUTTIPLAYER
+
+InfoPlayer = ID:nome:soldi:posizione:[proprietà1,proprietà2]:[uscitePrigione]
+
 Lancia i dadi
     Il client invia: ROLL;DADO1;DADO2
     Il server risponde: 0;TESTOERRORE = errore
-                        ROLL-0;{INFOPLAYERAGGIORNATE}			(quando capita su una proprieta)
-                        ROLL-1;{INFOPLAYERAGGIORNATE};TESTO	(quando capita sulle altre caselle)
+                        ROLL-0;INFOTUTTIPLAYER		(quando capita su una proprieta)
+                        ROLL-1;INFOTUTTIPLAYER;TESTO	    (quando capita sulle altre caselle)
 Acquisto casella
     Il client invia: BUY;
     Il server risponde: 0;TESTOERRORE = errore
-                        BUY;{INFOPLAYERAGGIORNATE}
+                        BUY;INFOTUTTIPLAYER
 Termina turno
     Il client invia: CH;
     Il server risponde: 0;TESTOERRORE = errore
@@ -24,7 +27,7 @@ Termina turno
 Ipoteca casella
     Il client invia: IP;IDCASELLA
     Il server risponde: 0;TESTOERRORE = errore
-                        IP;{INFOPLAYERAGGIORNATE}
+                        IP;INFOTUTTIPLAYER
 
 Lista dei nomi dei player e la relativa pedina
     Il client invia: LST;
@@ -32,8 +35,10 @@ Lista dei nomi dei player e la relativa pedina
 
 Informazione della casella
     Il client invia: INFC;IDCASELLA
-    Il server risponde: INFC;{INFOCASELLA}
+    Il server risponde: INFC;INFOCASELLA
+
+InfoCasella = nome:prezzo:pedaggio:valIpoteca:proprietario:valCasa
 
 Fine del gioco
     In risposta al change turno
-    Il server invia: END;{INFOPLAYER}
+    Il server invia: END;IDPLAYERVINCENTE
