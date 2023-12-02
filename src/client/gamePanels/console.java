@@ -17,6 +17,8 @@ public class console extends JPanel{
 
         panel = new JPanel();
         textArea = new JTextArea();
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
 
         textArea.setPreferredSize(new Dimension(500, 310));
         textArea.setEditable(false);
